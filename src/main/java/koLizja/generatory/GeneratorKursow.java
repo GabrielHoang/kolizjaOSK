@@ -4,6 +4,9 @@ import koLizja.Kategoria;
 import koLizja.Typ;
 import koLizja.encje.Kurs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GeneratorKursow extends GeneratorAbstract {
 
     //generator full random, z domyślną nazwą kursu i z zmodyfikowaną
@@ -39,5 +42,18 @@ public class GeneratorKursow extends GeneratorAbstract {
         kurs.setTyp(typ.toString());
 
         return kurs;
+    }
+
+    public List<Kurs> createEveryType() {
+
+        List<Kurs> kursy = new ArrayList<Kurs>();
+        int i = 0;
+        for(Kategoria kat : Kategoria.values()) {
+            for(Typ typ : Typ.values()) {
+                kursy.add(create(i,kat,typ));
+                i++;
+            }
+        }
+        return kursy;
     }
 }
