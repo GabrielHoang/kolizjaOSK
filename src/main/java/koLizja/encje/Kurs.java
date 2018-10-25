@@ -9,5 +9,5 @@ public class Kurs {
     private String nazwa;
     private String kategoria;
     private String typ;
-    private int godziny;
+    private String godziny;
 }
