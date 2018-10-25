@@ -29,7 +29,7 @@ public class GeneratorKursow extends GeneratorAbstract {
         kurs.setNazwa("Kurs kategorii " + typ.toString() + " | " + kategoria.toString() + " | " + id);
         kurs.setKategoria(kategoria.toString());
         kurs.setTyp(typ.toString());
-        kurs.setGodziny(GODZINY_KURSU);
+        kurs.setGodziny(TABELA_GODZIN[id%TABELA_GODZIN.length]);
 
         return kurs;
     }
@@ -50,8 +50,10 @@ public class GeneratorKursow extends GeneratorAbstract {
         int i = 0;
         for(Kategoria kat : Kategoria.values()) {
             for(Typ typ : Typ.values()) {
-                kursy.add(create(i,kat,typ));
-                i++;
+                for(String godzina : TABELA_GODZIN) {
+                    kursy.add(create(i,kat,typ));
+                    i++;
+                }
             }
         }
         return kursy;
