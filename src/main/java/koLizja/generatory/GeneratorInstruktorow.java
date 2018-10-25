@@ -25,7 +25,7 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
         instruktor.setImie(faker.name().firstName());
         instruktor.setNazwisko(faker.name().lastName());
         instruktor.setKategorie(Kategoria.values()[random.nextInt(3)].toString());
-        Date dataUrodzenia = faker.date().between(OLDEST_INSTR,YOUNGEST_INSTR);
+        Date dataUrodzenia = faker.date().between(NAJSTARSZY_INSTR, NAJMLODSZY_INSTR);
         Date dataPelnoletnosci = (new Date(
                 dataUrodzenia.getYear()+21,
                 dataUrodzenia.getMonth(),
