@@ -40,7 +40,7 @@ public class GeneratorAbstract {
     protected double SZANSA_NA_KURS_UZUP = 0.4;
     //minimalna  i maksymalna ilosc kursow realizowana przez jednego kursanta
     protected int MIN_ILOSC_KURSOW = 1;
-    protected int MAX_ILOSC_KURSOW = 5;
+    protected int MAX_ILOSC_KURSOW = 6;
     //instruktor teorii moze uczyc wiecej kursantow niz instruktor praktyki.
     protected int MAX_UCZNIOW_NA_INS_TEORII = 200;
     protected int MAX_UCZNIOW_NA_INS_PRAKTYKI = 15;
@@ -48,6 +48,19 @@ public class GeneratorAbstract {
     protected int DNI_DO_KOLEJNEGO_KURSU = 7;
     //godziny poszczegolnych kursow
     protected String TABELA_GODZIN_KURSOW_PODST[] =
+            {
+                    "9.00",
+                    "10.00",
+                    "11.00",
+                    "12.00",
+                    "13.00",
+                    "14.00",
+                    "15.00",
+                    "16.00",
+                    "17.00",
+                    "18.00"
+            };
+    protected String TABELA_GODZIN_KURSOW_UZUP[] =
             {
                     "10.00",
                     "11.00",
@@ -58,21 +71,9 @@ public class GeneratorAbstract {
                     "16.00",
                     "17.00",
                     "18.00",
-                    "19.00"
-            };
-    protected String TABELA_GODZIN_KURSOW_UZUP[] =
-            {
-                    "11.00",
-                    "12.00",
-                    "13.00",
-                    "14.00",
-                    "15.00",
-                    "16.00",
-                    "17.00",
-                    "18.00",
                     "19.00",
-                    "20.00"
             };
+    protected int ILOSC_OFEROWANYCH_GODZIN_KURSOW = TABELA_GODZIN_KURSOW_PODST.length;
     //ilosc kursow podczas roku
     protected int KURSY_ROCZNIE = (365/DNI_DO_KOLEJNEGO_KURSU)
             * Kategoria.values().length* TABELA_GODZIN_KURSOW_PODST.length;
@@ -80,17 +81,14 @@ public class GeneratorAbstract {
     protected int MIN_UCZNIOW_NA_KURS_A = 20;
     protected int MAX_UCZNIOW_NA_KURS_A = 50;
     protected int MIN_UCZNIOW_NA_KURS_B = 30;
-    protected int MAX_UCZNIOW_NA_KURS_B = 70;
+    protected int MAX_UCZNIOW_NA_KURS_B = 100;
     protected int MIN_UCZNIOW_NA_KURS_C = 20;
     protected int MAX_UCZNIOW_NA_KURS_C = 40;
-    //ilosc lat dla ktorych beda generowane dane (DATA_OD -> DATA_OD + LATA DANYCH)
-    protected int LATA_DANYCH = 3;
-    protected Date DATA_OD = new Date(2018,1,1);
-    protected Date DATA_DO = new Date(
-            DATA_OD.getYear()+LATA_DANYCH,
-            DATA_OD.getMonth(),
-            DATA_OD.getDay());
-
+    //daty w ktorych rozpoczynaja sie kursy. Dzieki temu kursant moze chodzic na wszystkie kursy o tej samej godzinie
+    //ale w innych dniach. (uproszczenie dla generowania)
+    protected Date KURS_A_DATA_OD = new Date(2018,1,1);
+    protected Date KURS_B_DATA_OD = new Date(2018,1,2);
+    protected Date KURS_C_DATA_OD = new Date(2018,1,3);
     //minimalna i maksymalna ilosc podejsc kursanta do egzaminow teoretycznych i praktycznych
     protected int MIN_ILOSC_EGZ = 0;
     protected int MAX_ILOSC_EGZ_TEORII = 3;
