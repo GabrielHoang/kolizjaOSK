@@ -19,4 +19,9 @@ public class Uczenie {
         this.idInstruktoraTeorii = instruktorTeorii.getId();
         this.idInstruktoraPraktyki = instruktorPraktyki.getId();
     }
+
+    //test
+    public Uczenie(Kurs kurs) {
+
+    }
 }
