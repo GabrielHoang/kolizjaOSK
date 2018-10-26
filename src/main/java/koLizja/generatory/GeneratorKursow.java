@@ -15,9 +15,9 @@ public class GeneratorKursow extends GeneratorAbstract {
         Kurs kurs = new Kurs();
         kurs.setId(id);
         kurs.setNazwa("Kurs kategorii " + typ.toString() + " | " + kategoria.toString() + " | " + id);
-        kurs.setKategoria(kategoria.toString());
-        kurs.setTyp(typ.toString());
-        kurs.setGodziny(TABELA_GODZIN[id%TABELA_GODZIN.length]);
+        kurs.setKategoria(kategoria);
+        kurs.setTyp(typ);
+        kurs.setGodziny(TABELA_GODZIN_KURSOW_PODST[id% TABELA_GODZIN_KURSOW_PODST.length]);
 
         return kurs;
     }
@@ -28,7 +28,7 @@ public class GeneratorKursow extends GeneratorAbstract {
         int i = 0;
         for(Kategoria kat : Kategoria.values()) {
             for(Typ typ : Typ.values()) {
-                for(String godzina : TABELA_GODZIN) {
+                for(String godzina : TABELA_GODZIN_KURSOW_PODST) {
                     kursy.add(create(i,kat,typ));
                     i++;
                 }
