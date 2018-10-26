@@ -24,7 +24,7 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
 
         instruktor.setImie(faker.name().firstName());
         instruktor.setNazwisko(faker.name().lastName());
-        instruktor.setKategorie(Kategoria.values()[random.nextInt(3)].toString());
+        instruktor.setKategorie(Kategoria.values()[random.nextInt(3)]);
         Date dataUrodzenia = faker.date().between(NAJSTARSZY_INSTR, NAJMLODSZY_INSTR);
         Date dataPelnoletnosci = (new Date(
                 dataUrodzenia.getYear()+21,
@@ -32,9 +32,10 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
                 dataUrodzenia.getDay()));
         Date dataUprawnien = faker.date().future(CZAS_ZDOBYCIA_UPRAWNIEN, TimeUnit.DAYS, dataPelnoletnosci);
         Date dataZatrudnienia = faker.date().future(CZAS_ZDOBYCIA_ZATRUDNIENIA,TimeUnit.DAYS,dataUprawnien);
-        instruktor.setDataUrodzenia(sdf.format(dataUrodzenia.toString()));
-        instruktor.setDataUprawnien(sdf.format(dataUprawnien.toString()));
-        instruktor.setDataZatrudnienia(sdf.format((dataZatrudnienia.toString())));
+        //TODO trzeba sformatowac daty do odpowiedniej formy.
+//        instruktor.setDataUrodzenia(sdf.format(dataUrodzenia.toString()));
+//        instruktor.setDataUprawnien(sdf.format(dataUprawnien.toString()));
+//        instruktor.setDataZatrudnienia(sdf.format((dataZatrudnienia.toString())));
         instruktor.setNumTel(faker.phoneNumber().cellPhone());
         instruktor.setAdres(faker.address().city()
                 + " " + faker.address().streetAddress());
@@ -44,9 +45,9 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
 
     public Instruktor create (int id) {
 
-        Instruktor instruktor = new Instruktor();
+        Instruktor instruktor = create();
         instruktor.setId(id);
-        instruktor.setUprawnienia(Uprawnienia.values()[random.nextInt(2)].toString());
+        instruktor.setUprawnienia(Uprawnienia.values()[random.nextInt(2)]);
 
         return instruktor;
     }
@@ -55,7 +56,7 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
 
         Instruktor instruktor = new Instruktor();
         instruktor.setId(id);
-        instruktor.setUprawnienia(uprawnienia.toString());
+        instruktor.setUprawnienia(uprawnienia);
 
         return instruktor;
     }

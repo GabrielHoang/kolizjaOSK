@@ -2,19 +2,32 @@ package koLizja.generatory;
 
 import koLizja.Kategoria;
 import koLizja.Typ;
+import koLizja.Uprawnienia;
 import koLizja.encje.Instruktor;
 import koLizja.encje.Kurs;
 import koLizja.encje.Kursant;
 import koLizja.encje.Uczenie;
+import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
+@Data
 public class GeneratorUczenie extends GeneratorAbstract{
 
-    List<Kurs> kursy;
-    List<Kursant> kursanci;
-    List<Instruktor> instruktorzy;
-    List<Uczenie> uczenie;
+    private List<Kurs> kursy;
+    private List<Kursant> kursanci;
+    private List<Instruktor> instruktorzy;
+    private List<Uczenie> uczenie = new ArrayList<Uczenie>();
+
+    private ListIterator<Kurs> kursIterator;
+    private ListIterator<Kursant> kursantIterator;
+    private ListIterator<Instruktor> instruktorIterator;
+    private ListIterator<Uczenie>uczenieIterator;
 
     int stworzoneUczenia = 0;
     int kolejnyTerminKursow = 0;
@@ -25,6 +38,9 @@ public class GeneratorUczenie extends GeneratorAbstract{
         this.kursy = kursy;
         this.kursanci = kursanci;
         this.instruktorzy = instruktorzy;
+        this.kursIterator = kursy.listIterator();
+        this.kursantIterator = kursanci.listIterator();
+        this.instruktorIterator = instruktorzy.listIterator();
     }
 
     //Glowna metoda kreowania Uczenia. Kreator konczy prace jesli skoncza sie uczniowie lub osiagnie limit zadanych
@@ -42,38 +58,47 @@ public class GeneratorUczenie extends GeneratorAbstract{
         Kurs kurs;
         Instruktor instruktor;
 
-        while (kursanci.listIterator().hasNext() || stworzoneUczenia < zadanychUczen) {
+        while (kursantIterator.hasNext() || stworzoneUczenia < zadanychUczen) {
 
-            if(kursanci.listIterator().nextIndex() % 100 == 0) {
+
+            if(kursantIterator.nextIndex() % 100 == 0) {
                 porcjaKursantow++;
                 godzinaZajec++;
                 godzinaZajec = godzinaZajec % ILOSC_OFEROWANYCH_GODZIN_KURSOW;
             }
 
-            if(kursanci.listIterator().nextIndex() % 1000 == 0) {
+            if(kursantIterator.nextIndex() % 1000 == 0) {
                 kolejnyTerminKursow++;
             }
 
-
-
-
-
+            kursant = kursantIterator.next();
 
             //dla kazdego kursanta jest losowany zestaw kursow na ktore zostanie zapisany
             int iloscWylosowanychKursow = random.nextInt(MAX_ILOSC_KURSOW)+MIN_ILOSC_KURSOW;
-            for(int i = 0; i < iloscWylosowanychKursow; i++) {
-                random.ints(1,6).distinct().limit(iloscWylosowanychKursow).forEach(
-                    wylosowanyWariant -> uczenie.add(new Uczenie(getKurs(wylosowanyWariant)))
-                );
-            }
+            stworzoneUczenia+=iloscWylosowanychKursow;
+
+            Kursant finalKursant = kursant;
+            //poniższy IntStream to generator liczb w podanym zakresie. Wygeneruje ich tyle ile wynosi
+            //iloscWylosowanychKursow i dla kazdej liczby z IntStream stworzy nowy kurs.
+            //TODO do dodania pozostale pola uczenia
+              IntStream.range(1,6).distinct().limit(iloscWylosowanychKursow).forEach(
+                wylosowanyWariant -> uczenie.add(new Uczenie(
+                        przypiszKurs(wylosowanyWariant),
+                        finalKursant,
+                        przypiszInstruktora(wylosowanyWariant,Uprawnienia.T),
+                        przypiszInstruktora(wylosowanyWariant,Uprawnienia.P)
+                ))
+            );
+
 
 
         }
+        System.out.println("Stworzone uczenia: " +stworzoneUczenia);
 
 
     }
 
-    public Kurs getKurs(int wariant) {
+    public Kurs przypiszKurs(int wariant) {
         try {
             switch (wariant) {
                 case 1 : return znajdzKurs(Kategoria.A,Typ.PODSTAWOWY,TABELA_GODZIN_KURSOW_PODST[godzinaZajec]);
@@ -94,9 +119,10 @@ public class GeneratorUczenie extends GeneratorAbstract{
 
         boolean found = false;
         Kurs szukanyKurs = null;
+        kursIterator = kursy.listIterator();
 
-        while(!found && kursy.listIterator().hasNext()) {
-            szukanyKurs = kursy.listIterator().next();
+        while(!found && kursIterator.nextIndex() != kursy.size()) {
+            szukanyKurs = kursIterator.next();
             if(szukanyKurs.getKategoria()==kat
             && szukanyKurs.getTyp() == typ
             && szukanyKurs.getGodziny() == godz) {
@@ -112,6 +138,50 @@ public class GeneratorUczenie extends GeneratorAbstract{
         return szukanyKurs;
     }
 
+    public Instruktor przypiszInstruktora(int wariant, Uprawnienia uprawnienia) {
+        try {
+            switch (wariant) {
+                case 1 : return znajdzInstruktora(Kategoria.A,uprawnienia);
+                case 2 : return znajdzInstruktora(Kategoria.A,uprawnienia);
+                case 3 : return znajdzInstruktora(Kategoria.B,uprawnienia);
+                case 4 : return znajdzInstruktora(Kategoria.B,uprawnienia);
+                case 5 : return znajdzInstruktora(Kategoria.C,uprawnienia);
+                case 6 : return znajdzInstruktora(Kategoria.C,uprawnienia);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //jesli po podjeciu prob == wielkosc listy instruktorow nie znajdzie instruktora o takiej kombinacji
+    //wychodzi z petli i rzuca blad
+    public Instruktor znajdzInstruktora(Kategoria kat, Uprawnienia upr) throws Exception {
+
+        boolean found = false;
+        Instruktor instruktor = null;
+        int proby = 0;
+
+        while(!found) {
+            instruktor = instruktorzy.get(random.nextInt(instruktorzy.size()));
+
+            if(instruktor.getUprawnienia() == upr
+            && instruktor.getKategorie() == kat) {
+                found = true;
+            }
+
+            if(!found) {
+                proby++;
+            }
+
+            if (proby == instruktorzy.size()) {
+                throw new Exception("Nie znaleziono instruktora dla kategorii: " + kat
+                + " i uprawnieniach: " + upr);
+            }
+        }
+
+        return  instruktor;
+    }
 
 
 

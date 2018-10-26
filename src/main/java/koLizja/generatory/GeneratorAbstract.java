@@ -96,3 +96,5 @@ public class GeneratorAbstract {
 
 
 }
+
+//TODO usuniecie niepotrzebnych stalych

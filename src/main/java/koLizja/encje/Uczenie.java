@@ -20,8 +20,4 @@ public class Uczenie {
         this.idInstruktoraPraktyki = instruktorPraktyki.getId();
     }
 
-    //test
-    public Uczenie(Kurs kurs) {
-
-    }
 }
