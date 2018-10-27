@@ -6,7 +6,7 @@ import lombok.Data;
 public class Uczenie {
 
     private int idKursu;
-    private int peselKursanta;
+    private String peselKursanta;
     private int idInstruktoraTeorii;
     private int idInstruktoraPraktyki;
     private String dataRozpoczecia;

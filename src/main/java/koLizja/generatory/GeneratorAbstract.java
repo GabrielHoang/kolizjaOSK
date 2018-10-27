@@ -28,7 +28,7 @@ public class GeneratorAbstract {
     protected int CZAS_ZDOBYCIA_ZATRUDNIENIA = 720;
 
     //KURS
-    protected int GODZINY_KURSU = 30;
+    protected int GODZINY_KURSU = 30; // ???
 
     //UCZENIE
     protected int ILOSC_UCZEN = 1000000;
@@ -50,14 +50,20 @@ public class GeneratorAbstract {
     protected int TABELA_GODZIN_KURSOW_PODST[] =
             {
                     30,
+                    35,
+                    45,
                     60,
+                    75,
                     90
             };
     protected int TABELA_GODZIN_KURSOW_UZUP[] =
             {
+                    15,
                     10,
+                    7,
                     5,
-                    3
+                    3,
+                    2
             };
     protected int ILOSC_OFEROWANYCH_GODZIN_KURSOW = TABELA_GODZIN_KURSOW_PODST.length;
     //ilosc kursow podczas roku
@@ -72,11 +78,14 @@ public class GeneratorAbstract {
     protected int MAX_UCZNIOW_NA_KURS_C = 40;
     //daty w ktorych rozpoczynaja sie kursy. Dzieki temu kursant moze chodzic na wszystkie kursy o tej samej godzinie
     //ale w innych dniach. (uproszczenie dla generowania)
+    protected  Date DATA_PIERWSZEGO_UCZENIA = new Date(2018, 1, 1);
+    protected  Date DATA_OSTATNIEGO_UCZENIA = new Date(2018, 11, 1);
+
     protected Date KURS_A_DATA_OD = new Date(2018,1,1);
     protected Date KURS_B_DATA_OD = new Date(2018,1,2);
     protected Date KURS_C_DATA_OD = new Date(2018,1,3);
     //minimalna i maksymalna ilosc podejsc kursanta do egzaminow teoretycznych i praktycznych
-    protected int MIN_ILOSC_EGZ = 0;
+    protected int MIN_ILOSC_EGZ = 1;
     protected int MAX_ILOSC_EGZ_TEORII = 3;
     protected int MAX_ILOSC_EGZ_PRAKTYKI = 4;
 

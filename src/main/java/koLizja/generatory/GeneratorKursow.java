@@ -17,7 +17,10 @@ public class GeneratorKursow extends GeneratorAbstract {
         kurs.setNazwa("Kurs kategorii " + typ.toString() + " | " + kategoria.toString() + " | " + id);
         kurs.setKategoria(kategoria);
         kurs.setTyp(typ);
-        kurs.setGodziny(TABELA_GODZIN_KURSOW_PODST[id% TABELA_GODZIN_KURSOW_PODST.length]);
+        if (typ == Typ.PODSTAWOWY)
+            kurs.setGodziny(TABELA_GODZIN_KURSOW_PODST[id% TABELA_GODZIN_KURSOW_PODST.length]);
+        else
+            kurs.setGodziny(TABELA_GODZIN_KURSOW_UZUP[id% TABELA_GODZIN_KURSOW_UZUP.length]);
 
         return kurs;
     }

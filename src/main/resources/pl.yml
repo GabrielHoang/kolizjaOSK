@@ -3,18 +3,19 @@ pl:
     name:
     address:
       country: [Polska]
-      building_number: ['#####', '####', '###']
-      street_prefix: ['ul.', 'al.']
+      building_number: ['1##', '##', '#']
+      street_prefix: ['ul.']
       secondary_address: ['Apt. ###', 'Suite ###']
 
       postcode: ['8#-###']
       state: [Pomorskie]
       state_abbr: [PM]
-      city_name: [Gdańsk, Gdynia, Rumia, Sopot, Żukowo]
+      city_name: [Gdańsk]
+      str_name: [Kołobrzeska, Hynka, Achillesa, Asnyka, Abrahama, Mickiewicza, Aldony, Akacjowa, Aksamitna, Fredry, Gryglewskiego, Majkowskiego, Altanki, Ametystowa, Angielska, Cerery, Chabrowa, Charzykowska, Chełmińska, Ciasna, Cicha, Ciechanowska, Cienista, Chodowieckiego, Farenheita, Danusi, Deotymy, Dobrzyńskich, Bohomolca, Liszta, Zabłockiego, Gołębia, Goplańska, Góralska, Gradowa, Harfowa, Heleny, Modrzejewskiej, Internetowa, Inżynierska, Igielnicka, Irysowa, Galla, Jachtowa, Malczewskiego, Bażyńskiego, Brożka, Dantyszka, Husa, Kanapariusza, Keplera, Kiepury, Wojnarskiego, Jantarowa, Korczaka, Meissnera, Jasna, Jastrzębia, Jelenia, Kacza, Kadetów, Kalinowska, Sośnickiego, Tetmajera, Kempingowa, Kielecka, Kliniczna, Kolejrzy, Kombatantów, Konna, Konstelacji, Koszalińska, Kozia, Kręta, Krucza, Krylowa, Sychty, Majdera, Tischnera, Łanowa, Latarniana, Legnicka, Kruczkowskiego, Lipcowa, Lipowa, Lirowa, Łódzka, Maciejkowa, Maki, Marsa, Mazurska, Miedza, Minogi, Nagietkowa, Neptuna, Ogarna, Olsztyńska, Opacka, Platynowa, Plutona, Pocztowa, Przyjemna, Pusta, Rabatki, Racławicka, Radarowa, Radiowa, Remusa, Reymonta, Amundsena, Rosiczki, Rumiankowa, Rusałki, Secesyjna, Goszczyńskiego, Sienna, Spichrzowa, Spokojna, Srebrna, Stajenna, Staszica, Świdnicka, Szyprów, Teatralna, Tęczowa, Teleskopowa, Telimeny, Ukośna, Ukryta, Wilanowska, Wolarza, Zabłotna, Zagórna, Zatokowa, Zawiejska, Związkowa, Żytnia]
       city:
         - "#{city_name}"
       street_name:
-        - "#{street_prefix} #{Name.last_name}"
+        - "#{street_prefix} #{str_name}"
       street_address:
         - "#{street_name} #{building_number}"
       default_country: [Polska]
@@ -61,6 +62,6 @@ pl:
         - "#{first_name} #{last_name}"
 
     phone_number:
-      formats: ['12-###-##-##', '13-###-##-##', '14-###-##-##', '15-###-##-##', '16-###-##-##', '17-###-##-##', '18-###-##-##', '22-###-##-##', '23-###-##-##', '24-###-##-##', '25-###-##-##', '29-###-##-##', '32-###-##-##', '33-###-##-##', '34-###-##-##', '41-###-##-##', '42-###-##-##', '43-###-##-##', '44-###-##-##', '46-###-##-##', '48-###-##-##', '52-###-##-##', '54-###-##-##', '55-###-##-##', '56-###-##-##', '58-###-##-##', '59-###-##-##', '61-###-##-##', '62-###-##-##', '63-###-##-##', '65-###-##-##', '67-###-##-##', '68-###-##-##', '71-###-##-##', '74-###-##-##', '75-###-##-##', '76-###-##-##', '77-###-##-##', '81-###-##-##', '82-###-##-##', '83-###-##-##', '84-###-##-##', '85-###-##-##', '86-###-##-##', '87-###-##-##', '89-###-##-##', '91-###-##-##', '94-###-##-##', '95-###-##-##']
+      formats: ['+48#########']
     cell_phone:
-      formats: ['50-###-##-##', '51-###-##-##', '53-###-##-##', '57-###-##-##', '60-###-##-##', '66-###-##-##', '69-###-##-##', '72-###-##-##', '73-###-##-##', '78-###-##-##', '79-###-##-##', '88-###-##-##']
+      formats: ['+48#########']

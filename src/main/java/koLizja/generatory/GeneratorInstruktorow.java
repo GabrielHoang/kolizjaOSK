@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 //zatrudnieni w OSK najpóźniej
 //max 15 lat stazu
 
-
 public class GeneratorInstruktorow extends GeneratorAbstract{
 
     private Instruktor create(){
@@ -34,7 +33,7 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
                 dataUrodzenia.getDay()));
         Date dataUprawnien = faker.date().future(CZAS_ZDOBYCIA_UPRAWNIEN, TimeUnit.DAYS, dataPelnoletnosci);
         Date dataZatrudnienia = faker.date().future(CZAS_ZDOBYCIA_ZATRUDNIENIA,TimeUnit.DAYS,dataUprawnien);
-        //TODO trzeba sformatowac daty do odpowiedniej formy.
+
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         instruktor.setDataUrodzenia(df.format(dataUrodzenia));
         instruktor.setDataUprawnien(df.format(dataUprawnien));

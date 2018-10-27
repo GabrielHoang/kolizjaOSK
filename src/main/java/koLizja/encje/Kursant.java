@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Kursant {
 
-    private int pesel;
+    private String pesel;
     private String imie;
     private String nazwisko;
     private String adres;
