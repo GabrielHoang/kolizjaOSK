@@ -10,6 +10,9 @@ import koLizja.encje.Uczenie;
 import lombok.Data;
 
 import java.util.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -113,7 +116,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
         return null;
     }
 
-    public Kurs znajdzKurs(Kategoria kat, Typ typ, String godz) throws Exception {
+    public Kurs znajdzKurs(Kategoria kat, Typ typ, int godz) throws Exception {
 
         boolean found = false;
         Kurs szukanyKurs = null;

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 //trzeba napisac konstruktor z mozliwoscia wybrania posiadanych uprawnien (nasze T/P)
@@ -16,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 //uprawniena zdobywaja w wieku przynajmniej 21 lat + rand(5 lat)
 //zatrudnieni w OSK najpóźniej
 //max 15 lat stazu
-
 
 public class GeneratorInstruktorow extends GeneratorAbstract{
 
@@ -34,10 +35,11 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
                 dataUrodzenia.getDay()));
         Date dataUprawnien = faker.date().future(CZAS_ZDOBYCIA_UPRAWNIEN, TimeUnit.DAYS, dataPelnoletnosci);
         Date dataZatrudnienia = faker.date().future(CZAS_ZDOBYCIA_ZATRUDNIENIA,TimeUnit.DAYS,dataUprawnien);
-        //TODO trzeba sformatowac daty do odpowiedniej formy.
-//        instruktor.setDataUrodzenia(sdf.format(dataUrodzenia.toString()));
-//        instruktor.setDataUprawnien(sdf.format(dataUprawnien.toString()));
-//        instruktor.setDataZatrudnienia(sdf.format((dataZatrudnienia.toString())));
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        instruktor.setDataUrodzenia(df.format(dataUrodzenia));
+        instruktor.setDataUprawnien(df.format(dataUprawnien));
+        instruktor.setDataZatrudnienia(df.format(dataZatrudnienia));
         instruktor.setNumTel(faker.phoneNumber().cellPhone());
         instruktor.setAdres(faker.address().city()
                 + " " + faker.address().streetAddress());

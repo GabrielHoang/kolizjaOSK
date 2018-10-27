@@ -10,13 +10,15 @@ public class GeneratorKursantow extends GeneratorAbstract{
     public Kursant create(int id) {
 
         Kursant kursant = new Kursant();
-        //budowaie peselu (nalezy wziac pod uwage pierwsze 6 cyfr ktore odnosza sie do daty urodzenia)
-        //do poprawienia
-        kursant.setPesel(
-                faker.number().numberBetween(85,99)
-        +faker.number().numberBetween(01,12)
-        +faker.number().numberBetween(01,31)
-        +faker.number().numberBetween(10000,99999));
+
+        String pesel = Integer.toString(faker.number().numberBetween(8,9)) //pierwsza cyfra roku
+                + Integer.toString(faker.number().numberBetween(0,9)) //druga cyfra roku
+                + Integer.toString(faker.number().numberBetween(0,0)) //0 jako pierwsza cyfra miesiąca
+                + Integer.toString(faker.number().numberBetween(1,9)) //1-9 jako druga cyfra miesiąca
+                + Integer.toString(faker.number().numberBetween(10,28)) //10-28 dzień
+                + Integer.toString(faker.number().numberBetween(10000,99999)); //końcówka numeru pesel
+
+        kursant.setPesel(pesel);
         kursant.setImie(faker.name().firstName());
         kursant.setNazwisko(faker.name().lastName());
         kursant.setAdres(faker.address().city()
