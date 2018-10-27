@@ -36,7 +36,7 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
         Date dataUprawnien = faker.date().future(CZAS_ZDOBYCIA_UPRAWNIEN, TimeUnit.DAYS, dataPelnoletnosci);
         Date dataZatrudnienia = faker.date().future(CZAS_ZDOBYCIA_ZATRUDNIENIA,TimeUnit.DAYS,dataUprawnien);
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
         instruktor.setDataUrodzenia(df.format(dataUrodzenia));
         instruktor.setDataUprawnien(df.format(dataUprawnien));
         instruktor.setDataZatrudnienia(df.format(dataZatrudnienia));

@@ -11,12 +11,12 @@ public class Uczenie {
     private String peselKursanta;
     private int idInstruktoraTeorii;
     private int idInstruktoraPraktyki;
-    private Date dataRozpoczecia;
+    private String dataRozpoczecia;
     private int podejsciaTeoria;
     private int podejsciaPraktyka;
 
     public Uczenie(Kurs kurs, Kursant kursant, Instruktor instruktorTeorii, Instruktor instruktorPraktyki,
-                   Date dataRozpoczecia, int podejsciaTeoria, int podejsciaPraktyka) {
+                   String dataRozpoczecia, int podejsciaTeoria, int podejsciaPraktyka) {
         this.idKursu = kurs.getId();
         this.peselKursanta = kursant.getPesel();
         this.idInstruktoraTeorii = instruktorTeorii.getId();

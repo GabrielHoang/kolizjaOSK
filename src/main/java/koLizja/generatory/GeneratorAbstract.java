@@ -3,6 +3,7 @@ package koLizja.generatory;
 import com.github.javafaker.Faker;
 import koLizja.Kategoria;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -13,8 +14,7 @@ public class GeneratorAbstract {
     //uzyskanie polskiej wersji danych z generatora
     protected Faker faker = new Faker(new Locale("pl"));
     //format daty w stringu
-    protected SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     protected Random random = new Random();
 
     //KURSANCI
@@ -81,9 +81,10 @@ public class GeneratorAbstract {
     protected  Date DATA_PIERWSZEGO_UCZENIA = new Date(2018, 1, 1);
     protected  Date DATA_OSTATNIEGO_UCZENIA = new Date(2018, 11, 1);
 
-    protected Date KURS_A_DATA_OD = new Date(2018,1,1);
-    protected Date KURS_B_DATA_OD = new Date(2018,1,2);
-    protected Date KURS_C_DATA_OD = new Date(2018,1,3);
+    //domyślną wartością dla generowanej daty jest 1900 - stąd 118 aby uzyskać rok 2018
+    protected Date KURS_A_DATA_OD = new Date(118,1,1);
+    protected Date KURS_B_DATA_OD = new Date(118,1,2);
+    protected Date KURS_C_DATA_OD = new Date(118,1,3);
     //minimalna i maksymalna ilosc podejsc kursanta do egzaminow teoretycznych i praktycznych
     protected int MIN_ILOSC_EGZ = 1;
     protected int MAX_ILOSC_EGZ_TEORII = 3;

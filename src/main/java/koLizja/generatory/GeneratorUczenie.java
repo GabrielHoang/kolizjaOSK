@@ -88,7 +88,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
                         finalKursant,
                         przypiszInstruktora(wylosowanyWariant,Uprawnienia.T),
                         przypiszInstruktora(wylosowanyWariant,Uprawnienia.P),
-                        przypiszDateRozpoczecia(wylosowanyWariant),
+                        df.format(przypiszDateRozpoczecia(wylosowanyWariant)),
                         random.nextInt(MAX_ILOSC_EGZ_TEORII) + MIN_ILOSC_EGZ,
                         random.nextInt(MAX_ILOSC_EGZ_PRAKTYKI) + MIN_ILOSC_EGZ
                 ))
@@ -200,7 +200,6 @@ public class GeneratorUczenie extends GeneratorAbstract{
 
     public Date przypiszDateRozpoczecia (int wariant) {
         Calendar calendar = Calendar.getInstance();
-
         switch (wariant) {
             case 1:
             case 2:
