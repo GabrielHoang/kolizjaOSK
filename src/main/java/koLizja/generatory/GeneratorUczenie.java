@@ -81,7 +81,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
             Kursant finalKursant = kursant;
             //poniższy IntStream to generator liczb w podanym zakresie. Wygeneruje ich tyle ile wynosi
             //iloscWylosowanychKursow i dla kazdej liczby z IntStream stworzy nowy kurs.
-            //TODO do dodania pozostale pola uczenia
+
               IntStream.range(1,6).distinct().limit(iloscWylosowanychKursow).forEach(
                 wylosowanyWariant -> uczenie.add(new Uczenie(
                         przypiszKurs(wylosowanyWariant),
@@ -121,6 +121,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
         boolean found = false;
         Kurs szukanyKurs = null;
         kursIterator = kursy.listIterator();
+
 
         while(!found && kursIterator.nextIndex() != kursy.size()) {
             szukanyKurs = kursIterator.next();
@@ -163,23 +164,36 @@ public class GeneratorUczenie extends GeneratorAbstract{
         Instruktor instruktor = null;
         int proby = 0;
 
-        while(!found) {
-            instruktor = instruktorzy.get(random.nextInt(instruktorzy.size()));
-
-            if(instruktor.getUprawnienia() == upr
-            && instruktor.getKategorie() == kat) {
-                found = true;
+        //dla postawowej wersji z 6 instruktorami
+        if (instruktorzy.size() == 6) {
+            for(Instruktor ins : instruktorzy) {
+                if(
+                        ins.getKategorie()==kat
+                        && ins.getUprawnienia()==upr
+                ) {
+                    return ins;
+                }
             }
+        } else {
+            while(!found) {
+                instruktor = instruktorzy.get(random.nextInt(instruktorzy.size()));
 
-            if(!found) {
-                proby++;
-            }
+                if(instruktor.getUprawnienia() == upr
+                        && instruktor.getKategorie() == kat) {
+                    found = true;
+                }
 
-            if (proby == instruktorzy.size()) {
-                throw new Exception("Nie znaleziono instruktora dla kategorii: " + kat
-                + " i uprawnieniach: " + upr);
+                if(!found) {
+                    proby++;
+                }
+
+                if (proby == instruktorzy.size()) {
+                    throw new Exception("Nie znaleziono instruktora dla kategorii: " + kat
+                            + " i uprawnieniach: " + upr);
+                }
             }
         }
+
 
         return  instruktor;
     }
