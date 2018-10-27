@@ -28,7 +28,7 @@ public class GeneratorKursow extends GeneratorAbstract {
         int i = 0;
         for(Kategoria kat : Kategoria.values()) {
             for(Typ typ : Typ.values()) {
-                for(String godzina : TABELA_GODZIN_KURSOW_PODST) {
+                for(int godzina : TABELA_GODZIN_KURSOW_PODST) {
                     kursy.add(create(i,kat,typ));
                     i++;
                 }

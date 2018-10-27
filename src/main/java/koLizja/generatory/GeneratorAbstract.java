@@ -20,8 +20,8 @@ public class GeneratorAbstract {
     //KURSANCI
 
     //INSTRUKTORZY
-    protected Date NAJSTARSZY_INSTR = new Date(1980,1,1);
-    protected Date NAJMLODSZY_INSTR = new Date(1993,12,31);
+    protected Date NAJSTARSZY_INSTR = new Date(80,1,1);
+    protected Date NAJMLODSZY_INSTR = new Date(93,12,31);
     //po ilu dniach od uzyskania pełnoletności uzyskuje uprawnienia
     protected int CZAS_ZDOBYCIA_UPRAWNIEN = 1800;
     //po ilu dniach od uzyskania uprawnień uzyskuje zatrudneinie
@@ -47,31 +47,17 @@ public class GeneratorAbstract {
     //odstep czasowy dla kolejnych kursow
     protected int DNI_DO_KOLEJNEGO_KURSU = 7;
     //godziny poszczegolnych kursow
-    protected String TABELA_GODZIN_KURSOW_PODST[] =
+    protected int TABELA_GODZIN_KURSOW_PODST[] =
             {
-                    "9.00",
-                    "10.00",
-                    "11.00",
-                    "12.00",
-                    "13.00",
-                    "14.00",
-                    "15.00",
-                    "16.00",
-                    "17.00",
-                    "18.00"
+                    30,
+                    60,
+                    90
             };
-    protected String TABELA_GODZIN_KURSOW_UZUP[] =
+    protected int TABELA_GODZIN_KURSOW_UZUP[] =
             {
-                    "10.00",
-                    "11.00",
-                    "12.00",
-                    "13.00",
-                    "14.00",
-                    "15.00",
-                    "16.00",
-                    "17.00",
-                    "18.00",
-                    "19.00",
+                    10,
+                    5,
+                    3
             };
     protected int ILOSC_OFEROWANYCH_GODZIN_KURSOW = TABELA_GODZIN_KURSOW_PODST.length;
     //ilosc kursow podczas roku

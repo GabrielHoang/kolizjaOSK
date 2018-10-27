@@ -115,7 +115,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
         return null;
     }
 
-    public Kurs znajdzKurs(Kategoria kat, Typ typ, String godz) throws Exception {
+    public Kurs znajdzKurs(Kategoria kat, Typ typ, int godz) throws Exception {
 
         boolean found = false;
         Kurs szukanyKurs = null;

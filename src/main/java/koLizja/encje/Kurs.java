@@ -11,7 +11,7 @@ public class Kurs {
     private String nazwa;
     private Kategoria kategoria;
     private Typ typ;
-    private String godziny;
+    private int godziny;
 
 
 }
