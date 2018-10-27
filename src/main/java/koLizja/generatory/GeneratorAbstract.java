@@ -90,7 +90,7 @@ public class GeneratorAbstract {
     protected Date KURS_B_DATA_OD = new Date(2018,1,2);
     protected Date KURS_C_DATA_OD = new Date(2018,1,3);
     //minimalna i maksymalna ilosc podejsc kursanta do egzaminow teoretycznych i praktycznych
-    protected int MIN_ILOSC_EGZ = 0;
+    protected int MIN_ILOSC_EGZ = 1;
     protected int MAX_ILOSC_EGZ_TEORII = 3;
     protected int MAX_ILOSC_EGZ_PRAKTYKI = 4;
 

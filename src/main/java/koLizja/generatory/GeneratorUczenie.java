@@ -9,10 +9,7 @@ import koLizja.encje.Kursant;
 import koLizja.encje.Uczenie;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -53,6 +50,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
     public void create(int zadanychUczen) {
 
 
+        kursantIterator = kursanci.listIterator();
 
         Kursant kursant;
         Kurs kurs;
@@ -86,16 +84,16 @@ public class GeneratorUczenie extends GeneratorAbstract{
                         przypiszKurs(wylosowanyWariant),
                         finalKursant,
                         przypiszInstruktora(wylosowanyWariant,Uprawnienia.T),
-                        przypiszInstruktora(wylosowanyWariant,Uprawnienia.P)
+                        przypiszInstruktora(wylosowanyWariant,Uprawnienia.P),
+                        przypiszDateRozpoczecia(wylosowanyWariant),
+                        random.nextInt(MAX_ILOSC_EGZ_TEORII) + MIN_ILOSC_EGZ,
+                        random.nextInt(MAX_ILOSC_EGZ_PRAKTYKI) + MIN_ILOSC_EGZ
                 ))
             );
 
 
 
         }
-        System.out.println("Stworzone uczenia: " +stworzoneUczenia);
-
-
     }
 
     public Kurs przypiszKurs(int wariant) {
@@ -183,6 +181,28 @@ public class GeneratorUczenie extends GeneratorAbstract{
         return  instruktor;
     }
 
+    public Date przypiszDateRozpoczecia (int wariant) {
+        Calendar calendar = Calendar.getInstance();
+
+        switch (wariant) {
+            case 1:
+            case 2:
+                calendar.setTime(KURS_A_DATA_OD);
+                calendar.add(Calendar.DAY_OF_WEEK,kolejnyTerminKursow*DNI_DO_KOLEJNEGO_KURSU);
+                return calendar.getTime();
+            case 3:
+            case 4:
+                calendar.setTime(KURS_B_DATA_OD);
+                calendar.add(Calendar.DAY_OF_WEEK,kolejnyTerminKursow*DNI_DO_KOLEJNEGO_KURSU);
+                return calendar.getTime();
+            case 5:
+            case 6:
+                calendar.setTime(KURS_C_DATA_OD);
+                calendar.add(Calendar.DAY_OF_WEEK,kolejnyTerminKursow*DNI_DO_KOLEJNEGO_KURSU);
+                return calendar.getTime();
+        }
+        return null;
+    }
 
 
 }

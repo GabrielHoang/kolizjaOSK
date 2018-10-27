@@ -4,7 +4,9 @@ import koLizja.Kategoria;
 import koLizja.Uprawnienia;
 import koLizja.encje.Instruktor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -52,12 +54,25 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
         return instruktor;
     }
 
-    public Instruktor create (int id, Uprawnienia uprawnienia) {
+    public Instruktor create (int id, Kategoria kat, Uprawnienia upr) {
 
-        Instruktor instruktor = new Instruktor();
+        Instruktor instruktor = create();
         instruktor.setId(id);
-        instruktor.setUprawnienia(uprawnienia);
+        instruktor.setUprawnienia(upr);
+        instruktor.setKategorie(kat);
 
         return instruktor;
+    }
+
+    public List<Instruktor> createEveryType() {
+        List<Instruktor> instruktorzy = new ArrayList<>();
+        int i = 0;
+        for(Kategoria kat : Kategoria.values()) {
+            for(Uprawnienia upr : Uprawnienia.values()) {
+                instruktorzy.add(create(i,kat,upr));
+            }
+        }
+        return instruktorzy;
+
     }
 }
