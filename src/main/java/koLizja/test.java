@@ -37,11 +37,14 @@ public class test {
            kursanci.add(generatorKursantow.create(i));
             i+=1;
         }
-        int j = 0;
-        while(j < iloscInstruktorow) {
-            instruktorzy.add(generatorInstruktorow.create(j));
-            j++;
-        }
+
+        instruktorzy = generatorInstruktorow.createEveryType();
+
+//        int j = 0;
+//        while(j < iloscInstruktorow) {
+//            instruktorzy.add(generatorInstruktorow.create(j));
+//            j++;
+//        }
         kursy = generatorKursow.createEveryType();
 
         OutputFile outputFile = new OutputFile();
@@ -53,16 +56,16 @@ public class test {
                 + iloscInstruktorow + " instruktorow\n"
                 + iloscKursantow + " kursantow\n"
                 + (System.currentTimeMillis()-start)/1000+ " s");
-        System.out.println("Generowanie uczenia");
-        start = System.currentTimeMillis();
-
-        GeneratorUczenie generatorUczenie = new GeneratorUczenie(kursy, kursanci, instruktorzy);
-        generatorUczenie.create(iloscUczen);
-
-        System.out.println("Stworzone uczenia: " + generatorUczenie.getStworzoneUczenia());
-        OutputFile.create(generatorUczenie.getUczenie(), "lista uczenie");
-
-        System.out.println("Czas generowania uczenia: " + (System.currentTimeMillis()-start)/1000 + " s");
+//        System.out.println("Generowanie uczenia");
+//        start = System.currentTimeMillis();
+//
+//        GeneratorUczenie generatorUczenie = new GeneratorUczenie(kursy, kursanci, instruktorzy);
+//        generatorUczenie.create(iloscUczen);
+//
+//        System.out.println("Stworzone uczenia: " + generatorUczenie.getStworzoneUczenia());
+//        OutputFile.create(generatorUczenie.getUczenie(), "lista uczenie");
+//
+//        System.out.println("Czas generowania uczenia: " + (System.currentTimeMillis()-start)/1000 + " s");
     }
 
 

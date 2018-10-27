@@ -72,6 +72,7 @@ public class GeneratorInstruktorow extends GeneratorAbstract{
         for(Kategoria kat : Kategoria.values()) {
             for(Uprawnienia upr : Uprawnienia.values()) {
                 instruktorzy.add(create(i,kat,upr));
+                i++;
             }
         }
         return instruktorzy;
