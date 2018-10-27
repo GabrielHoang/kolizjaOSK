@@ -9,7 +9,7 @@ public class OutputFile {
 
         try {
 
-            FileWriter fileWriter = new FileWriter(nazwa+".txt");
+            FileWriter fileWriter = new FileWriter(nazwa+".bulk");
             for (T elem: lista) {
                 fileWriter.write(elem.toString()+'\n');
             }

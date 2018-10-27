@@ -2,8 +2,6 @@ package koLizja.encje;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class Uczenie {
 
@@ -26,4 +24,10 @@ public class Uczenie {
         this.podejsciaPraktyka = podejsciaPraktyka;
     }
 
+    public String toString(){
+        String str = Integer.toString(idKursu) + ';' + peselKursanta + ';' + idInstruktoraTeorii + ';'
+                + idInstruktoraPraktyki + ';' + dataRozpoczecia + ';' + Integer.toString(podejsciaTeoria) + ';'
+                + Integer.toString(podejsciaPraktyka);
+        return str;
+    }
 }

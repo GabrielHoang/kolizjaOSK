@@ -13,6 +13,10 @@ public class Kurs {
     private Typ typ;
     private int godziny;
 
+    public String toString(){
+        String str = Integer.toString(id) + ';' + nazwa + ';' + kategoria + ';' + typ + ';' + godziny;
+        return str;
+    }
 
 }
 

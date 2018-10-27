@@ -11,4 +11,9 @@ public class Kursant {
     private String adres;
     private String numTel;
 
+    public String toString(){
+        String str = pesel + ';' + imie + ';' + nazwisko + ';' + adres + ';' + numTel;
+        return str;
+    }
+
 }

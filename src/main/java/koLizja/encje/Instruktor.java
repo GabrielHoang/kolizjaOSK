@@ -18,6 +18,10 @@ public class Instruktor {
     private String numTel;
     private String adres;
 
-//TODO we wszystkich encjach metoda toString() musi być sformatowana tak aby jej wyjście nadawało się do SQL'a
-
+    public String toString(){
+        String str = Integer.toString(id) + ';' + imie + ';' + nazwisko + ';' + uprawnienia + ';'
+                    + kategorie + ';' +  dataZatrudnienia + ';' + dataUrodzenia + ';' + dataUprawnien + ';'
+                    + numTel + ';' + adres;
+        return str;
+    }
 }

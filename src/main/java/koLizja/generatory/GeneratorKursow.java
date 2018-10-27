@@ -14,7 +14,7 @@ public class GeneratorKursow extends GeneratorAbstract {
 
         Kurs kurs = new Kurs();
         kurs.setId(id);
-        kurs.setNazwa("Kurs kategorii " + typ.toString() + " | " + kategoria.toString() + " | " + id);
+        kurs.setNazwa("Kurs kategorii " + kategoria.toString() + " | " + typ.toString() + " | " + id);
         kurs.setKategoria(kategoria);
         kurs.setTyp(typ);
         if (typ == Typ.PODSTAWOWY)

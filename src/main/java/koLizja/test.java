@@ -13,12 +13,9 @@ import java.util.List;
 
 public class test {
 
-    static int iloscKursantow = 200;
-    static int iloscInstruktorow = 50;
-    static int iloscUczen = 300;
-
-
-
+    static int iloscKursantow = 20;
+    static int iloscInstruktorow = 10;
+    static int iloscUczen = 40;
 
     public static void main(String[] args) {
 
@@ -47,10 +44,10 @@ public class test {
 //        }
         kursy = generatorKursow.createEveryType();
 
-        OutputFile outputFile = new OutputFile();
-        OutputFile.create(kursy,"lista kursow");
-        OutputFile.create(instruktorzy,"lista instuktorów");
-        OutputFile.create(kursanci,"lista kursantów");
+//        OutputFile outputFile = new OutputFile();
+        OutputFile.create(kursy,"kursy");
+        OutputFile.create(instruktorzy,"instuktorzy");
+        OutputFile.create(kursanci,"kursanci");
 
         System.out.println("Czas generowania:\n"
                 + iloscInstruktorow + " instruktorow\n"
@@ -63,7 +60,7 @@ public class test {
         generatorUczenie.create(iloscUczen);
 
         System.out.println("Stworzone uczenia: " + generatorUczenie.getStworzoneUczenia());
-        OutputFile.create(generatorUczenie.getUczenie(), "lista uczenie");
+        OutputFile.create(generatorUczenie.getUczenie(), "uczenia");
 
         System.out.println("Czas generowania uczenia: " + (System.currentTimeMillis()-start)/1000 + " s");
     }
