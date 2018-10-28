@@ -29,7 +29,7 @@ public class GeneratorAbstract {
     protected int CZAS_ZDOBYCIA_ZATRUDNIENIA = 720;
 
     //KURS
-    protected int GODZINY_KURSU = 30; // ???
+    protected int GODZINY_KURSU = 30;
 
     //UCZENIE
     protected int ILOSC_UCZEN = 1000000;
@@ -99,6 +99,11 @@ public class GeneratorAbstract {
     //wiedlki ocen wystawianych przez kursantow
     protected int MIN_OCENA_INSTRUKTORA = 4;
     protected int MAX_OCENA_INSTRUKTORA = 10;
+
+    //ZMIANY
+    protected int DNI_NOWY_KURSANT = 14;
+    protected int DNI_NOWY_INSTRUKTOR = 90;
+    protected int DNI_ROZWOJ_INSTRUKTORA = 28;
 
 }
 

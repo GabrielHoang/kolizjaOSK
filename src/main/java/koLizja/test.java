@@ -14,6 +14,7 @@ public class test {
     static int iloscKursantow = 20;
     static int iloscInstruktorow = 10;
     static int iloscUczen = 2;
+    static int liczbaDni = 60;
 
     public static void main(String[] args) {
 
@@ -70,6 +71,30 @@ public class test {
         ankiety = generatorWynikowAnkiet.getAnkiety();
         OutputFile.createCsv(ankiety,"ankiety");
         System.out.println("Czas generowania ankiet: " + (System.currentTimeMillis()-start)/1000 + " s");
+
+
+        //zmiany w czasie
+
+        List<Kursant> nowiKursanci = new ArrayList<Kursant>();
+        List<Instruktor> nowiInstruktorzy = new ArrayList<Instruktor>();
+        List<Instruktor> zmienieniInstruktorzy = new ArrayList<Instruktor>();
+
+        GeneratorZmian generatorZmain = new GeneratorZmian(liczbaDni, instruktorzy, kursanci);
+        nowiKursanci = generatorZmain.createKursanci();
+        nowiInstruktorzy = generatorZmain.createInstruktorzy();
+        zmienieniInstruktorzy = generatorZmain.modifyInstruktorzy();
+
+        OutputFile.createBulk(nowiInstruktorzy,"instruktorzy_t2");
+        OutputFile.createBulk(nowiKursanci,"kursanci_t2");
+
+        kursanci.addAll(nowiKursanci);
+        instruktorzy.addAll(nowiInstruktorzy);
+
+        // POTRZEBNE DODANIE NOWYCH UCZEŃ I NOWYCH ANKIET
+
+        OutputFile.createUpdate(zmienieniInstruktorzy, "instruktorzy_updates_t2");
+
+
     }
 
 

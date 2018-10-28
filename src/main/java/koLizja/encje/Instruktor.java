@@ -25,4 +25,9 @@ public class Instruktor {
         return str;
     }
 
+    public String toStringForUpdate(){
+        String str = "UPDATE dbo.Instruktor SET Kategorie='" + kategorie + "' WHERE ID_instr=" + Integer.toString(id);
+        return str;
+    }
+
 }
