@@ -27,7 +27,7 @@ public class Uczenie {
     public String toString(){
         String str = Integer.toString(idKursu) + ';' + peselKursanta + ';' + idInstruktoraTeorii + ';'
                 + idInstruktoraPraktyki + ';' + dataRozpoczecia + ';' + Integer.toString(podejsciaTeoria) + ';'
-                + Integer.toString(podejsciaPraktyka)  + '\r' + '\n';
+                + Integer.toString(podejsciaPraktyka);
         return str;
     }
 }

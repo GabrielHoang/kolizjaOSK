@@ -12,7 +12,7 @@ public class Kursant {
     private String numTel;
 
     public String toString(){
-        String str = pesel + ';' + imie + ';' + nazwisko + ';' + adres + ';' + numTel  + '\r' + '\n';
+        String str = pesel + ';' + imie + ';' + nazwisko + ';' + adres + ';' + numTel;
         return str;
     }
 

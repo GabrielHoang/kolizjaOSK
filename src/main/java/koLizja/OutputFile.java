@@ -11,7 +11,7 @@ public class OutputFile {
 
             FileWriter fileWriter = new FileWriter(nazwa+".bulk");
             for (T elem: lista) {
-                fileWriter.write(elem.toString());
+                fileWriter.write(elem.toString() + "\r\n");
             }
             fileWriter.close();
 
