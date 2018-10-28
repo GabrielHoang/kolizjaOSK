@@ -48,6 +48,8 @@ public class GeneratorWynikowAnkiet extends GeneratorAbstract {
                 ankieta.setExtraUwagi2("brak");
                 //INFO
                 ankieta.setIdKursu(ucz.getIdKursu());
+                ankieta.setOgolnaOcenaKursu((ankieta.getOcenaPrzygotowaniaPraktyki() +
+                        ankieta.getOcenaPrzygotowaniaTeorii())/2);
                 ankieta.setSkadWieszOSzkole(losujZrodloWiedzy().toString());
                 ankieta.setNapiszeNaTrojmiescie(losujTakNie());
                 ankieta.setPoleceZnajomym(losujTakNie());
@@ -132,7 +134,7 @@ public class GeneratorWynikowAnkiet extends GeneratorAbstract {
     }
 
     private int losujDomyslnyPrzedzial() {
-        return random.nextInt(MAX_OCENA_INSTRUKTORA)+MIN_OCENA_INSTRUKTORA;
+        return random.nextInt(MAX_OCENA_INSTRUKTORA - MIN_OCENA_INSTRUKTORA)+MIN_OCENA_INSTRUKTORA + 1;
     }
 
     private ZrodloWiedzyOSzkole losujZrodloWiedzy() {
