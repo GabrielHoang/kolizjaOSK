@@ -50,7 +50,7 @@ public class GeneratorWynikowAnkiet extends GeneratorAbstract {
                 ankieta.setIdKursu(ucz.getIdKursu());
                 ankieta.setOgolnaOcenaKursu((ankieta.getOcenaPrzygotowaniaPraktyki() +
                         ankieta.getOcenaPrzygotowaniaTeorii())/2);
-                ankieta.setSkadWieszOSzkole(losujZrodloWiedzy().toString());
+                ankieta.setSkadWieszOSzkole(losujZrodloWiedzy(ucz.getPeselKursanta()).toString());
                 ankieta.setNapiszeNaTrojmiescie(losujTakNie());
                 ankieta.setPoleceZnajomym(losujTakNie());
                 //METRYKA
@@ -137,8 +137,9 @@ public class GeneratorWynikowAnkiet extends GeneratorAbstract {
         return random.nextInt(MAX_OCENA_INSTRUKTORA - MIN_OCENA_INSTRUKTORA)+MIN_OCENA_INSTRUKTORA + 1;
     }
 
-    private ZrodloWiedzyOSzkole losujZrodloWiedzy() {
-        return ZrodloWiedzyOSzkole.values()[random.nextInt(ZrodloWiedzyOSzkole.values().length)];
+    private ZrodloWiedzyOSzkole losujZrodloWiedzy(String pesel) {
+        String last = pesel.substring(pesel.length() - 1);
+        return ZrodloWiedzyOSzkole.values()[Integer.parseInt(last)%4];
     }
 
     private Kursant getKursantByPesel(String pesel) throws Exception {
