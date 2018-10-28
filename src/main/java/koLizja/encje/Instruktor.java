@@ -24,4 +24,5 @@ public class Instruktor {
                     + numTel + ';' + adres;
         return str;
     }
+
 }

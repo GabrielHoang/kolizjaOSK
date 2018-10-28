@@ -5,11 +5,11 @@ import java.util.List;
 
 public class OutputFile {
 
-    public static <T> void create(List<T> lista, String nazwa){
+    private static <T> void create(List<T> lista, String nazwa, String rozszerzeniePliku){
 
         try {
 
-            FileWriter fileWriter = new FileWriter(nazwa+".bulk");
+            FileWriter fileWriter = new FileWriter(nazwa+rozszerzeniePliku);
             for (T elem: lista) {
                 fileWriter.write(elem.toString() + "\r\n");
             }
@@ -19,5 +19,13 @@ public class OutputFile {
             e.printStackTrace();
         }
 
+    }
+
+    public static <T> void createBulk(List<T> lista, String nazwa){
+        create(lista,nazwa,".bulk");
+    }
+
+    public static <T> void createCsv(List<T> lista, String nazwa){
+    create(lista,nazwa,".csv");
     }
 }

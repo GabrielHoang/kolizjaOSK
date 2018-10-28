@@ -1,12 +1,10 @@
 package koLizja;
 
+import koLizja.encje.Ankieta;
 import koLizja.encje.Instruktor;
 import koLizja.encje.Kurs;
 import koLizja.encje.Kursant;
-import koLizja.generatory.GeneratorInstruktorow;
-import koLizja.generatory.GeneratorKursantow;
-import koLizja.generatory.GeneratorKursow;
-import koLizja.generatory.GeneratorUczenie;
+import koLizja.generatory.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,7 @@ public class test {
 
     static int iloscKursantow = 20;
     static int iloscInstruktorow = 10;
-    static int iloscUczen = 40;
+    static int iloscUczen = 2;
 
     public static void main(String[] args) {
 
@@ -26,6 +24,7 @@ public class test {
         List<Kursant> kursanci = new ArrayList<Kursant>();
         List<Instruktor> instruktorzy = new ArrayList<Instruktor>();
         List<Kurs> kursy;
+        List<Ankieta> ankiety;
 
         long start = System.currentTimeMillis();
 
@@ -39,15 +38,15 @@ public class test {
 
 //        int j = 0;
 //        while(j < iloscInstruktorow) {
-//            instruktorzy.add(generatorInstruktorow.create(j));
+//            instruktorzy.add(generatorInstruktorow.createBulk(j));
 //            j++;
 //        }
         kursy = generatorKursow.createEveryType();
 
 //        OutputFile outputFile = new OutputFile();
-        OutputFile.create(kursy,"kursy");
-        OutputFile.create(instruktorzy,"instruktorzy");
-        OutputFile.create(kursanci,"kursanci");
+        OutputFile.createBulk(kursy,"kursy");
+        OutputFile.createBulk(instruktorzy,"instruktorzy");
+        OutputFile.createBulk(kursanci,"kursanci");
 
         System.out.println("Czas generowania:\n"
                 + iloscInstruktorow + " instruktorow\n"
@@ -60,9 +59,17 @@ public class test {
         generatorUczenie.create(iloscUczen);
 
         System.out.println("Stworzone uczenia: " + generatorUczenie.getStworzoneUczenia());
-        OutputFile.create(generatorUczenie.getUczenie(), "uczenia");
-
+        OutputFile.createBulk(generatorUczenie.getUczenie(), "uczenia");
         System.out.println("Czas generowania uczenia: " + (System.currentTimeMillis()-start)/1000 + " s");
+
+        System.out.println("Generowanie ankiet");
+        start = System.currentTimeMillis();
+        GeneratorWynikowAnkiet generatorWynikowAnkiet =
+                new GeneratorWynikowAnkiet(instruktorzy,kursy,kursanci,generatorUczenie.getUczenie());
+        generatorWynikowAnkiet.create();
+        ankiety = generatorWynikowAnkiet.getAnkiety();
+        OutputFile.createCsv(ankiety,"ankiety");
+        System.out.println("Czas generowania ankiet: " + (System.currentTimeMillis()-start)/1000 + " s");
     }
 
 

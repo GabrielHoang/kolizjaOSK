@@ -24,10 +24,11 @@ public class Uczenie {
         this.podejsciaPraktyka = podejsciaPraktyka;
     }
 
-    public String toString(){
+    public String toString() {
         String str = Integer.toString(idKursu) + ';' + peselKursanta + ';' + idInstruktoraTeorii + ';'
                 + idInstruktoraPraktyki + ';' + dataRozpoczecia + ';' + Integer.toString(podejsciaTeoria) + ';'
                 + Integer.toString(podejsciaPraktyka);
         return str;
     }
+
 }

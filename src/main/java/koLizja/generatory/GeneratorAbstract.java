@@ -5,6 +5,7 @@ import koLizja.Kategoria;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -80,7 +81,8 @@ public class GeneratorAbstract {
     //ale w innych dniach. (uproszczenie dla generowania)
     protected  Date DATA_PIERWSZEGO_UCZENIA = new Date(2018, 1, 1);
     protected  Date DATA_OSTATNIEGO_UCZENIA = new Date(2018, 11, 1);
-
+    //obecny rok
+    protected int OBECNY_ROK = Calendar.getInstance().get(Calendar.YEAR);
     //domyślną wartością dla generowanej daty jest 1900 - stąd 118 aby uzyskać rok 2018
     protected Date KURS_A_DATA_OD = new Date(118,1,1);
     protected Date KURS_B_DATA_OD = new Date(118,1,2);
@@ -90,6 +92,13 @@ public class GeneratorAbstract {
     protected int MAX_ILOSC_EGZ_TEORII = 3;
     protected int MAX_ILOSC_EGZ_PRAKTYKI = 4;
 
+    //ANKIETA
+
+    //po ilu dniach ankieta zostala uzupelniona (data rozpoczecia kursu +  dni do rozwiazania ankiety)
+    protected int DNI_DO_ROZWIAZANIA_ANKIETY = 90;
+    //wiedlki ocen wystawianych przez kursantow
+    protected int MIN_OCENA_INSTRUKTORA = 4;
+    protected int MAX_OCENA_INSTRUKTORA = 10;
 
 }
 
