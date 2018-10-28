@@ -21,7 +21,7 @@ public class Instruktor {
     public String toString(){
         String str = Integer.toString(id) + ';' + imie + ';' + nazwisko + ';' + uprawnienia + ';'
                     + kategorie + ';' +  dataZatrudnienia + ';' + dataUrodzenia + ';' + dataUprawnien + ';'
-                    + numTel + ';' + adres;
+                    + numTel + ';' + adres  + '\r' + '\n';
         return str;
     }
 }

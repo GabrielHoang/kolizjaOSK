@@ -46,7 +46,7 @@ public class test {
 
 //        OutputFile outputFile = new OutputFile();
         OutputFile.create(kursy,"kursy");
-        OutputFile.create(instruktorzy,"instuktorzy");
+        OutputFile.create(instruktorzy,"instruktorzy");
         OutputFile.create(kursanci,"kursanci");
 
         System.out.println("Czas generowania:\n"

@@ -14,7 +14,7 @@ public class Kurs {
     private int godziny;
 
     public String toString(){
-        String str = Integer.toString(id) + ';' + nazwa + ';' + kategoria + ';' + typ + ';' + godziny;
+        String str = Integer.toString(id) + ';' + nazwa + ';' + kategoria + ';' + typ + ';' + godziny + '\r' + '\n';
         return str;
     }
 
