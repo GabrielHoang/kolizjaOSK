@@ -11,9 +11,9 @@ import java.util.List;
 
 public class test {
 
-    static int iloscKursantow = 20;
-    static int iloscInstruktorow = 10;
-    static int iloscUczen = 2;
+    static int iloscKursantow = 10;
+    static int iloscInstruktorow = 6;
+    static int iloscUczen = 10;
 
     public static void main(String[] args) {
 

@@ -28,23 +28,10 @@ public class GeneratorAbstract {
     //po ilu dniach od uzyskania uprawnień uzyskuje zatrudneinie
     protected int CZAS_ZDOBYCIA_ZATRUDNIENIA = 720;
 
-    //KURS
-    protected int GODZINY_KURSU = 30; // ???
-
     //UCZENIE
-    protected int ILOSC_UCZEN = 1000000;
-    //udzialy poszczegolnych kategorii w ilosci uczen. Razem musza wynosic 1.0
-    protected double UDZIAL_KAT_A = 0.2;
-    protected double UDZIAL_KAT_B = 0.7;
-    protected double UDZIAL_KAT_C = 0.1;
-    //szansa na to ze kursant poza kursem podstawowym ma kurs uzupelniajacy
-    protected double SZANSA_NA_KURS_UZUP = 0.4;
     //minimalna  i maksymalna ilosc kursow realizowana przez jednego kursanta
     protected int MIN_ILOSC_KURSOW = 1;
     protected int MAX_ILOSC_KURSOW = 6;
-    //instruktor teorii moze uczyc wiecej kursantow niz instruktor praktyki.
-    protected int MAX_UCZNIOW_NA_INS_TEORII = 200;
-    protected int MAX_UCZNIOW_NA_INS_PRAKTYKI = 15;
     //odstep czasowy dla kolejnych kursow
     protected int DNI_DO_KOLEJNEGO_KURSU = 7;
     //godziny poszczegolnych kursow
@@ -67,20 +54,6 @@ public class GeneratorAbstract {
                     2
             };
     protected int ILOSC_OFEROWANYCH_GODZIN_KURSOW = TABELA_GODZIN_KURSOW_PODST.length;
-    //ilosc kursow podczas roku
-    protected int KURSY_ROCZNIE = (365/DNI_DO_KOLEJNEGO_KURSU)
-            * Kategoria.values().length* TABELA_GODZIN_KURSOW_PODST.length;
-    //maksymalna ilosc kursatow przypadajacych na
-    protected int MIN_UCZNIOW_NA_KURS_A = 20;
-    protected int MAX_UCZNIOW_NA_KURS_A = 50;
-    protected int MIN_UCZNIOW_NA_KURS_B = 30;
-    protected int MAX_UCZNIOW_NA_KURS_B = 100;
-    protected int MIN_UCZNIOW_NA_KURS_C = 20;
-    protected int MAX_UCZNIOW_NA_KURS_C = 40;
-    //daty w ktorych rozpoczynaja sie kursy. Dzieki temu kursant moze chodzic na wszystkie kursy o tej samej godzinie
-    //ale w innych dniach. (uproszczenie dla generowania)
-    protected  Date DATA_PIERWSZEGO_UCZENIA = new Date(2018, 1, 1);
-    protected  Date DATA_OSTATNIEGO_UCZENIA = new Date(2018, 11, 1);
     //obecny rok
     protected int OBECNY_ROK = Calendar.getInstance().get(Calendar.YEAR);
     //domyślną wartością dla generowanej daty jest 1900 - stąd 118 aby uzyskać rok 2018
@@ -101,5 +74,3 @@ public class GeneratorAbstract {
     protected int MAX_OCENA_INSTRUKTORA = 10;
 
 }
-
-//TODO usuniecie niepotrzebnych stalych
