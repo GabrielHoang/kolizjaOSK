@@ -23,6 +23,7 @@ public class Ankieta {
     String instruktorSpoznialSiePraktyka;
     String extraUwagi2;
 
+    int idKursu;
     Kategoria kategoria;
     int ogolnaOcenaKursu;
     String skadWieszOSzkole;
@@ -52,7 +53,7 @@ public class Ankieta {
                 instruktorSpoznialSiePraktyka + ';' +
                 extraUwagi2 + ';' +
 
-                kategoria  + ';' +
+                idKursu + ';' +
                 Integer.toString(ogolnaOcenaKursu) + ';' +
                 skadWieszOSzkole + ';' +
                 napiszeNaTrojmiescie + ';' +

@@ -5,10 +5,8 @@ import koLizja.ZrodloWiedzyOSzkole;
 import koLizja.encje.*;
 import lombok.Getter;
 
-import java.awt.*;
 import java.text.ParseException;
 import java.util.*;
-import java.util.List;
 
 public class GeneratorWynikowAnkiet extends GeneratorAbstract {
 
@@ -49,7 +47,7 @@ public class GeneratorWynikowAnkiet extends GeneratorAbstract {
                 ankieta.setInstruktorSpoznialSiePraktyka(losujTakNie());
                 ankieta.setExtraUwagi2("brak");
                 //INFO
-                ankieta.setKategoria(getKategoriaKursuById(ucz.getIdKursu()));
+                ankieta.setIdKursu(ucz.getIdKursu());
                 ankieta.setSkadWieszOSzkole(losujZrodloWiedzy().toString());
                 ankieta.setNapiszeNaTrojmiescie(losujTakNie());
                 ankieta.setPoleceZnajomym(losujTakNie());
