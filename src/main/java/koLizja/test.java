@@ -86,13 +86,12 @@ public class test {
 
         OutputFile.createBulk(nowiInstruktorzy,"instruktorzy_t2");
         OutputFile.createBulk(nowiKursanci,"kursanci_t2");
+        OutputFile.createUpdate(zmienieniInstruktorzy, "updates_t2");
 
         kursanci.addAll(nowiKursanci);
         instruktorzy.addAll(nowiInstruktorzy);
 
         // POTRZEBNE DODANIE NOWYCH UCZEŃ I NOWYCH ANKIET
-
-        OutputFile.createUpdate(zmienieniInstruktorzy, "instruktorzy_updates_t2");
 
 
     }
