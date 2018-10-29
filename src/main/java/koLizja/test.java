@@ -10,7 +10,7 @@ public class test {
 
     static int iloscKursantow = 300000;
     static int iloscInstruktorow = 1000;
-    static int iloscUczen = 1000000;
+    static int iloscUczen = 500000;
     static int liczbaDni = 60;
     static int iloscUczenZmian = 500;
 
@@ -116,23 +116,23 @@ public class test {
 
         //generowanie nowych ankiet
 
-        System.out.println("Generowanie ankiet");
-        start = System.currentTimeMillis();
-        GeneratorWynikowAnkiet generatorWynikowAnkiet =
-                new GeneratorWynikowAnkiet(instruktorzy,kursy,kursanci,generatorUczenie.getUczenie());
-        generatorWynikowAnkiet.create();
-        ankiety = generatorWynikowAnkiet.getAnkiety();
-        System.out.println("Czas generowania ankiet: " + (System.currentTimeMillis()-start)/1000 + " s");
-        System.out.println("Rozpoczynam zapis ankiet do pliku");
-        start = System.currentTimeMillis();
-        OutputFile.createBulk(ankiety,"ankiety");
-        System.out.println("Czas zapisu ankiet: " + (System.currentTimeMillis()-start)/1000 + " s");
-
-        GeneratorWynikowAnkiet generatorWynikowAnkietZmiany =
-                new GeneratorWynikowAnkiet(instruktorzy,kursy,nowiKursanci,generatorUczenieZmiany.getUczenie());
-        generatorWynikowAnkietZmiany.create();
-        noweAnkiety = generatorWynikowAnkietZmiany.getAnkiety();
-        OutputFile.createBulk(noweAnkiety,"ankiety_t2");
+//        System.out.println("Generowanie ankiet");
+//        start = System.currentTimeMillis();
+//        GeneratorWynikowAnkiet generatorWynikowAnkiet =
+//                new GeneratorWynikowAnkiet(instruktorzy,kursy,kursanci,generatorUczenie.getUczenie());
+//        generatorWynikowAnkiet.create();
+//        ankiety = generatorWynikowAnkiet.getAnkiety();
+//        System.out.println("Czas generowania ankiet: " + (System.currentTimeMillis()-start)/1000 + " s");
+//        System.out.println("Rozpoczynam zapis ankiet do pliku");
+//        start = System.currentTimeMillis();
+//        OutputFile.createBulk(ankiety,"ankiety");
+//        System.out.println("Czas zapisu ankiet: " + (System.currentTimeMillis()-start)/1000 + " s");
+//
+//        GeneratorWynikowAnkiet generatorWynikowAnkietZmiany =
+//                new GeneratorWynikowAnkiet(instruktorzy,kursy,nowiKursanci,generatorUczenieZmiany.getUczenie());
+//        generatorWynikowAnkietZmiany.create();
+//        noweAnkiety = generatorWynikowAnkietZmiany.getAnkiety();
+//        OutputFile.createBulk(noweAnkiety,"ankiety_t2");
 
 
     }
