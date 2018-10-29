@@ -1,9 +1,6 @@
 package koLizja;
 
-import koLizja.encje.Ankieta;
-import koLizja.encje.Instruktor;
-import koLizja.encje.Kurs;
-import koLizja.encje.Kursant;
+import koLizja.encje.*;
 import koLizja.generatory.*;
 
 import java.util.ArrayList;
@@ -11,10 +8,14 @@ import java.util.List;
 
 public class test {
 
-    static int iloscKursantow = 20;
-    static int iloscInstruktorow = 10;
-    static int iloscUczen = 2;
+    static int iloscKursantow = 300000;
+    static int iloscInstruktorow = 1000;
+    static int iloscUczen = 1000000;
     static int liczbaDni = 60;
+    static int iloscUczenZmian = 500;
+
+    //przy true generuje mala/pokazowa ilosc danych
+    static boolean maloDanych = false;
 
     public static void main(String[] args) {
 
@@ -24,8 +25,15 @@ public class test {
 
         List<Kursant> kursanci = new ArrayList<Kursant>();
         List<Instruktor> instruktorzy = new ArrayList<Instruktor>();
-        List<Kurs> kursy;
+        List<Kurs> kursy = new ArrayList<>();
         List<Ankieta> ankiety;
+
+        if (maloDanych) {
+            iloscInstruktorow=6;
+            iloscKursantow=10;
+            iloscUczen=10;
+            iloscUczenZmian=10;
+        }
 
         long start = System.currentTimeMillis();
 
@@ -35,33 +43,78 @@ public class test {
             i+=1;
         }
 
-        instruktorzy = generatorInstruktorow.createEveryType();
+        if (maloDanych) {
+            instruktorzy = generatorInstruktorow.createEveryType();
+        } else {
+            int j = 0;
+            while(j < iloscInstruktorow) {
+                instruktorzy.add(generatorInstruktorow.create(j));
+                j++;
+            }
+        }
 
-//        int j = 0;
-//        while(j < iloscInstruktorow) {
-//            instruktorzy.add(generatorInstruktorow.createBulk(j));
-//            j++;
-//        }
         kursy = generatorKursow.createEveryType();
 
-//        OutputFile outputFile = new OutputFile();
+
+
+
         OutputFile.createBulk(kursy,"kursy");
         OutputFile.createBulk(instruktorzy,"instruktorzy");
         OutputFile.createBulk(kursanci,"kursanci");
 
-        System.out.println("Czas generowania:\n"
-                + iloscInstruktorow + " instruktorow\n"
+        System.out.println(iloscInstruktorow + " instruktorow\n"
                 + iloscKursantow + " kursantow\n"
-                + (System.currentTimeMillis()-start)/1000+ " s");
+                + "Czas generowania:\n" +(System.currentTimeMillis()-start)/1000+ " s");
         System.out.println("Generowanie uczenia");
         start = System.currentTimeMillis();
 
         GeneratorUczenie generatorUczenie = new GeneratorUczenie(kursy, kursanci, instruktorzy);
+
+        if (maloDanych) {
+            generatorUczenie.ustawieniaMalychDanych(1,2,2);
+        }
+
         generatorUczenie.create(iloscUczen);
 
         System.out.println("Stworzone uczenia: " + generatorUczenie.getStworzoneUczenia());
         OutputFile.createBulk(generatorUczenie.getUczenie(), "uczenia");
         System.out.println("Czas generowania uczenia: " + (System.currentTimeMillis()-start)/1000 + " s");
+
+        //zmiany w czasie
+        System.out.println("GENEROWANIE ZMIAN");
+
+        List<Kursant> nowiKursanci = new ArrayList<Kursant>();
+        List<Instruktor> nowiInstruktorzy = new ArrayList<Instruktor>();
+        List<Ankieta> noweAnkiety = new ArrayList<>();
+
+        GeneratorZmian generatorZmian = new GeneratorZmian(liczbaDni, instruktorzy, kursanci, generatorUczenie);
+        nowiKursanci = generatorZmian.createKursanci();
+        nowiInstruktorzy = generatorZmian.createInstruktorzy(iloscInstruktorow);
+
+        if(!maloDanych) {
+            nowiInstruktorzy.addAll(generatorZmian.modifyInstruktorzy());
+        }
+
+
+        OutputFile.createBulk(nowiInstruktorzy,"instruktorzy_t2");
+        OutputFile.createBulk(nowiKursanci,"kursanci_t2");
+
+        System.out.println("Stworzono dodatkowych instruktorow i kursantow");
+
+
+        //generowanie nowego zbioru uczen
+        System.out.println("Generuje nowe uczenia");
+        GeneratorUczenie generatorUczenieZmiany = new GeneratorUczenie(kursy,nowiKursanci,instruktorzy);
+        generatorUczenieZmiany.wlaczTrybAktualizacji(nowiInstruktorzy);
+        generatorUczenieZmiany.setKolejnyTerminKursow(generatorUczenie.getKolejnyTerminKursow());
+        if (maloDanych) {
+            generatorUczenieZmiany.ustawieniaMalychDanych(2,4,2);
+        }
+        generatorUczenieZmiany.create(iloscUczenZmian);
+        OutputFile.createBulk(generatorUczenieZmiany.getUczenie(),"uczenie_t2");
+
+
+        //generowanie nowych ankiet
 
         System.out.println("Generowanie ankiet");
         start = System.currentTimeMillis();
@@ -69,33 +122,21 @@ public class test {
                 new GeneratorWynikowAnkiet(instruktorzy,kursy,kursanci,generatorUczenie.getUczenie());
         generatorWynikowAnkiet.create();
         ankiety = generatorWynikowAnkiet.getAnkiety();
-        OutputFile.createCsv(ankiety,"ankiety");
         System.out.println("Czas generowania ankiet: " + (System.currentTimeMillis()-start)/1000 + " s");
+        System.out.println("Rozpoczynam zapis ankiet do pliku");
+        start = System.currentTimeMillis();
+        OutputFile.createBulk(ankiety,"ankiety");
+        System.out.println("Czas zapisu ankiet: " + (System.currentTimeMillis()-start)/1000 + " s");
 
-
-        //zmiany w czasie
-
-        List<Kursant> nowiKursanci = new ArrayList<Kursant>();
-        List<Instruktor> nowiInstruktorzy = new ArrayList<Instruktor>();
-        List<Instruktor> zmienieniInstruktorzy = new ArrayList<Instruktor>();
-
-        GeneratorZmian generatorZmain = new GeneratorZmian(liczbaDni, instruktorzy, kursanci);
-        nowiKursanci = generatorZmain.createKursanci();
-        nowiInstruktorzy = generatorZmain.createInstruktorzy();
-        zmienieniInstruktorzy = generatorZmain.modifyInstruktorzy();
-
-        OutputFile.createBulk(nowiInstruktorzy,"instruktorzy_t2");
-        OutputFile.createBulk(nowiKursanci,"kursanci_t2");
-
-        kursanci.addAll(nowiKursanci);
-        instruktorzy.addAll(nowiInstruktorzy);
-
-        // POTRZEBNE DODANIE NOWYCH UCZEŃ I NOWYCH ANKIET
-
-        OutputFile.createUpdate(zmienieniInstruktorzy, "instruktorzy_updates_t2");
+        GeneratorWynikowAnkiet generatorWynikowAnkietZmiany =
+                new GeneratorWynikowAnkiet(instruktorzy,kursy,nowiKursanci,generatorUczenieZmiany.getUczenie());
+        generatorWynikowAnkietZmiany.create();
+        noweAnkiety = generatorWynikowAnkietZmiany.getAnkiety();
+        OutputFile.createBulk(noweAnkiety,"ankiety_t2");
 
 
     }
+
 
 
 }

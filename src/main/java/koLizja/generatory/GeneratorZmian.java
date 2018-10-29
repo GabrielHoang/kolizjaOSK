@@ -1,6 +1,7 @@
 package koLizja.generatory;
 
 import koLizja.Kategoria;
+import koLizja.Uprawnienia;
 import koLizja.encje.*;
 
 import java.util.ArrayList;
@@ -11,15 +12,16 @@ public class GeneratorZmian extends GeneratorAbstract {
     private List<Instruktor> instruktorzy;
     private List<Kurs> kursy;
     private List<Kursant> kursanci;
-    private List<Uczenie> uczenie;
+    private GeneratorUczenie generatorUczenie;
     private List<Ankieta> ankiety;
     private int liczbaDni;
 
 
-    public GeneratorZmian(int liczbaDni, List<Instruktor> instruktorzy, List<Kursant> kursanci) {
+    public GeneratorZmian(int liczbaDni, List<Instruktor> instruktorzy, List<Kursant> kursanci,GeneratorUczenie generatorUczenie) {
         this.instruktorzy = instruktorzy;
         this.kursanci = kursanci;
         this.liczbaDni = liczbaDni;
+        this.generatorUczenie = generatorUczenie;
     }
 
     //zmiany w danych są zależne od liczby dni, jaka upłynęła
@@ -44,24 +46,55 @@ public class GeneratorZmian extends GeneratorAbstract {
 
         int i = 0;
         while(i < liczbaDni/DNI_ROZWOJ_INSTRUKTORA) {
+            Instruktor instruktor;
+            Instruktor nowyInstruktor;
+            Kategoria wczesniejszaKategoria = null;
             int index = random.nextInt(instruktorzy.size());
-            if (instruktorzy.get(index).getKategorie().equals(Kategoria.B))
-                instruktorzy.get(index).setKategorie(Kategoria.A);
-            else if (instruktorzy.get(index).getKategorie().equals(Kategoria.A))
+            if (instruktorzy.get(index).getKategorie().equals(Kategoria.A)) {
                 instruktorzy.get(index).setKategorie(Kategoria.B);
-            i+=1;
-            zmienieniInstruktorzy.add(instruktorzy.get(index));
+                wczesniejszaKategoria = Kategoria.A;
+            }
+
+            else if (instruktorzy.get(index).getKategorie().equals(Kategoria.B)){
+                instruktorzy.get(index).setKategorie(Kategoria.C);
+                wczesniejszaKategoria = Kategoria.B;
+            }
+            else {
+                instruktorzy.get(index).setKategorie(Kategoria.A);
+                wczesniejszaKategoria = Kategoria.C;
+            }
+            instruktor = instruktorzy.get(index);
+            try{
+                for(Uczenie ucz : generatorUczenie.getUczenie()) {
+                    if (ucz.getIdInstruktoraPraktyki() == instruktor.getId()) {
+                        nowyInstruktor = generatorUczenie.znajdzInstruktora(wczesniejszaKategoria, Uprawnienia.P);
+                        ucz.setIdInstruktoraPraktyki(nowyInstruktor.getId());
+                    }
+                    else  if (ucz.getIdInstruktoraTeorii() == instruktor.getId()) {
+                        nowyInstruktor = generatorUczenie.znajdzInstruktora(wczesniejszaKategoria, Uprawnienia.T);
+                        ucz.setIdInstruktoraTeorii(nowyInstruktor.getId());
+                    }
+                }
+            }catch (Exception e ) {
+                e.printStackTrace();
+            }
+
+
+
+
+            i++;
+            zmienieniInstruktorzy.add(instruktor);
         }
         return zmienieniInstruktorzy;
     }
 
-    public List<Instruktor> createInstruktorzy(){
+    public List<Instruktor> createInstruktorzy(int id){
 
         List<Instruktor> nowiInstruktorzy = new ArrayList<>();
         GeneratorInstruktorow generatorInstruktorów = new GeneratorInstruktorow();
 
-        int i = 0;
-        while(i < liczbaDni/DNI_NOWY_INSTRUKTOR) {
+        int i = id;
+        while(i < (id+liczbaDni/DNI_NOWY_INSTRUKTOR)) {
             nowiInstruktorzy.add(generatorInstruktorów.create(i));
             i+=1;
         }

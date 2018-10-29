@@ -62,7 +62,7 @@ public class Ankieta {
                 imie + ';' +
                 nazwisko + ';' +
                 Integer.toString(wiek) + ';' +
-                pesel+ '\r' + '\n';
+                pesel;
     }
 
 }

@@ -32,6 +32,12 @@ public class GeneratorAbstract {
     protected int GODZINY_KURSU = 30;
 
     //UCZENIE
+
+    //co ile kursantow generator zmienia grupe godzinowa kursow
+    protected int PORCJA_KURSANTOW = 100;
+    //co ilu kursantow generator przechodzi do kolejnego terminu kursu
+    protected int KURSANCI_NA_TERMIN = 1000;
+
     protected int ILOSC_UCZEN = 1000000;
     //udzialy poszczegolnych kategorii w ilosci uczen. Razem musza wynosic 1.0
     protected double UDZIAL_KAT_A = 0.2;
@@ -101,8 +107,9 @@ public class GeneratorAbstract {
     protected int MAX_OCENA_INSTRUKTORA = 10;
 
     //ZMIANY
+    //nie mniejsza niz zmienna z liczbaDni z main'a , bo inaczej nic w danym punkcie nie wygeneruje
     protected int DNI_NOWY_KURSANT = 14;
-    protected int DNI_NOWY_INSTRUKTOR = 90;
+    protected int DNI_NOWY_INSTRUKTOR = 30;
     protected int DNI_ROZWOJ_INSTRUKTORA = 28;
 
 }

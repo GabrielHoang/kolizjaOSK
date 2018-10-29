@@ -23,6 +23,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
     private List<Kursant> kursanci;
     private List<Instruktor> instruktorzy;
     private List<Uczenie> uczenie = new ArrayList<Uczenie>();
+    private List<Instruktor> nowiInstruktorzy;
 
     private ListIterator<Kurs> kursIterator;
     private ListIterator<Kursant> kursantIterator;
@@ -33,6 +34,8 @@ public class GeneratorUczenie extends GeneratorAbstract{
     int kolejnyTerminKursow = 0;
     int porcjaKursantow = 0;
     int godzinaZajec = 0;
+    //najpierw paruj z nowymi instruktorami
+    boolean najpierwNowiInstruktorzy = false;
 
     public GeneratorUczenie(List<Kurs> kursy, List<Kursant> kursanci, List<Instruktor> instruktorzy) {
         this.kursy = kursy;
@@ -56,19 +59,18 @@ public class GeneratorUczenie extends GeneratorAbstract{
         kursantIterator = kursanci.listIterator();
 
         Kursant kursant;
-        Kurs kurs;
-        Instruktor instruktor;
-
-        while (kursantIterator.hasNext() || stworzoneUczenia < zadanychUczen) {
 
 
-            if(kursantIterator.nextIndex() % 100 == 0) {
+        while (kursantIterator.hasNext() && stworzoneUczenia < zadanychUczen) {
+
+
+            if(kursantIterator.nextIndex() % PORCJA_KURSANTOW == 0) {
                 porcjaKursantow++;
                 godzinaZajec++;
                 godzinaZajec = godzinaZajec % ILOSC_OFEROWANYCH_GODZIN_KURSOW;
             }
 
-            if(kursantIterator.nextIndex() % 1000 == 0) {
+            if(kursantIterator.nextIndex() % KURSANCI_NA_TERMIN == 0) {
                 kolejnyTerminKursow++;
             }
 
@@ -89,8 +91,8 @@ public class GeneratorUczenie extends GeneratorAbstract{
                         przypiszInstruktora(wylosowanyWariant,Uprawnienia.T),
                         przypiszInstruktora(wylosowanyWariant,Uprawnienia.P),
                         df.format(przypiszDateRozpoczecia(wylosowanyWariant)),
-                        random.nextInt(MAX_ILOSC_EGZ_TEORII) + MIN_ILOSC_EGZ,
-                        random.nextInt(MAX_ILOSC_EGZ_PRAKTYKI) + MIN_ILOSC_EGZ
+                        random.nextInt(MAX_ILOSC_EGZ_TEORII + 1 - MIN_ILOSC_EGZ) + MIN_ILOSC_EGZ,
+                        random.nextInt(MAX_ILOSC_EGZ_PRAKTYKI + 1 - MIN_ILOSC_EGZ) + MIN_ILOSC_EGZ
                 ))
             );
 
@@ -160,6 +162,17 @@ public class GeneratorUczenie extends GeneratorAbstract{
     //wychodzi z petli i rzuca blad
     public Instruktor znajdzInstruktora(Kategoria kat, Uprawnienia upr) throws Exception {
 
+        if(najpierwNowiInstruktorzy) {
+            for (Instruktor ins: nowiInstruktorzy) {
+                if(
+                        ins.getKategorie()==kat
+                                && ins.getUprawnienia()==upr
+                ) {
+                    return ins;
+                }
+            }
+        }
+
         boolean found = false;
         Instruktor instruktor = null;
         int proby = 0;
@@ -220,5 +233,14 @@ public class GeneratorUczenie extends GeneratorAbstract{
         return null;
     }
 
+    public void wlaczTrybAktualizacji(List<Instruktor> nowiInstruktorzy) {
+        this.nowiInstruktorzy = nowiInstruktorzy;
+        this.najpierwNowiInstruktorzy = true;
+    }
+    public void ustawieniaMalychDanych(int porcja, int kursanciNaTermin, int maksKursowNaKursanta) {
+        this.PORCJA_KURSANTOW=porcja;
+        this.KURSANCI_NA_TERMIN=kursanciNaTermin;
+        this.MAX_ILOSC_KURSOW=maksKursowNaKursanta;
+    }
 
 }
