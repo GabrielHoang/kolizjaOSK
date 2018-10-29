@@ -3,6 +3,11 @@ GO
 
 USE OSK
 GO
+/*
+drop table UCZENIE
+drop table kurs
+drop table kursant
+drop table instruktor */
 
 CREATE TABLE KURS
 (
@@ -26,7 +31,7 @@ GO
 
 CREATE TABLE INSTRUKTOR
 (
-    ID_instr INTEGER IDENTITY(1,1) PRIMARY KEY,
+    ID_instr INTEGER PRIMARY KEY,
     Imie VARCHAR(15) NOT NULL,
     Nazwisko VARCHAR(30) NOT NULL,
     Uprawnienia VARCHAR(1) CHECK (Uprawnienia in ('T', 'P')) NOT NULL,
