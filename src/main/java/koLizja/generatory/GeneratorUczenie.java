@@ -10,11 +10,7 @@ import koLizja.encje.Uczenie;
 import lombok.Data;
 
 import java.util.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 @Data
 public class GeneratorUczenie extends GeneratorAbstract{
@@ -62,7 +58,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
         Kurs kurs;
         Instruktor instruktor;
 
-        while (kursantIterator.hasNext() || stworzoneUczenia < zadanychUczen) {
+        while (kursantIterator.hasNext() && stworzoneUczenia < zadanychUczen) {
 
 
             if(kursantIterator.nextIndex() % 100 == 0) {

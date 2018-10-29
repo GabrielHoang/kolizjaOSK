@@ -107,7 +107,7 @@ public class GeneratorAbstract {
     protected int MAX_OCENA_INSTRUKTORA = 10;
 
     //ZMIANY
-    //nie mniejsza niz zmienna z liczbaDni z main'a , bo inaczej nic w danym punkcie nie wygeneruje
+    //nie mniejsza niz zmienna z liczbaDni z maina, bo inaczej nic w danym punkcie nie wygeneruje
     protected int DNI_NOWY_KURSANT = 14;
     protected int DNI_NOWY_INSTRUKTOR = 30;
     protected int DNI_ROZWOJ_INSTRUKTORA = 28;

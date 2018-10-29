@@ -1,6 +1,9 @@
 package koLizja;
 
-import koLizja.encje.*;
+import koLizja.encje.Ankieta;
+import koLizja.encje.Instruktor;
+import koLizja.encje.Kurs;
+import koLizja.encje.Kursant;
 import koLizja.generatory.*;
 
 import java.util.ArrayList;
@@ -15,7 +18,7 @@ public class test {
     static int iloscUczenZmian = 500;
 
     //przy true generuje mala/pokazowa ilosc danych
-    static boolean maloDanych = false;
+    static boolean maloDanych = true;
 
     public static void main(String[] args) {
 
@@ -113,6 +116,9 @@ public class test {
         generatorUczenieZmiany.create(iloscUczenZmian);
         OutputFile.createBulk(generatorUczenieZmiany.getUczenie(),"uczenie_t2");
 
+        //generowanie zmian w instruktorach
+        List<Instruktor> zmienieniInstruktorzy = generatorZmian.modifyInstruktorzy();
+        OutputFile.createUpdate(zmienieniInstruktorzy,"updates");
 
         //generowanie nowych ankiet
 
@@ -133,6 +139,8 @@ public class test {
         generatorWynikowAnkietZmiany.create();
         noweAnkiety = generatorWynikowAnkietZmiany.getAnkiety();
         OutputFile.createBulk(noweAnkiety,"ankiety_t2");
+        OutputFile.createCsv(noweAnkiety,"ankiety_t2");
+
 
 
     }

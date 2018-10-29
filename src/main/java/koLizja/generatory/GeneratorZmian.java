@@ -1,8 +1,10 @@
 package koLizja.generatory;
 
 import koLizja.Kategoria;
-import koLizja.Uprawnienia;
-import koLizja.encje.*;
+import koLizja.encje.Ankieta;
+import koLizja.encje.Instruktor;
+import koLizja.encje.Kurs;
+import koLizja.encje.Kursant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +66,7 @@ public class GeneratorZmian extends GeneratorAbstract {
                 wczesniejszaKategoria = Kategoria.C;
             }
             instruktor = instruktorzy.get(index);
+            /*
             try{
                 for(Uczenie ucz : generatorUczenie.getUczenie()) {
                     if (ucz.getIdInstruktoraPraktyki() == instruktor.getId()) {
@@ -77,10 +80,7 @@ public class GeneratorZmian extends GeneratorAbstract {
                 }
             }catch (Exception e ) {
                 e.printStackTrace();
-            }
-
-
-
+            } */
 
             i++;
             zmienieniInstruktorzy.add(instruktor);
