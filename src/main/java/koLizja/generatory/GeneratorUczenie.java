@@ -59,25 +59,26 @@ public class GeneratorUczenie extends GeneratorAbstract{
         kursantIterator = kursanci.listIterator();
 
         Kursant kursant;
+        Kurs kurs;
+        Instruktor instruktor;
+
+        while (kursantIterator.hasNext() || stworzoneUczenia < zadanychUczen) {
 
 
-        while (kursantIterator.hasNext() && stworzoneUczenia < zadanychUczen) {
-
-
-            if(kursantIterator.nextIndex() % PORCJA_KURSANTOW == 0) {
+            if(kursantIterator.nextIndex() % 100 == 0) {
                 porcjaKursantow++;
                 godzinaZajec++;
                 godzinaZajec = godzinaZajec % ILOSC_OFEROWANYCH_GODZIN_KURSOW;
             }
 
-            if(kursantIterator.nextIndex() % KURSANCI_NA_TERMIN == 0) {
+            if(kursantIterator.nextIndex() % 1000 == 0) {
                 kolejnyTerminKursow++;
             }
 
             kursant = kursantIterator.next();
 
             //dla kazdego kursanta jest losowany zestaw kursow na ktore zostanie zapisany
-            int iloscWylosowanychKursow = random.nextInt(MAX_ILOSC_KURSOW)+MIN_ILOSC_KURSOW;
+            int iloscWylosowanychKursow = random.nextInt(MAX_ILOSC_KURSOW-MIN_ILOSC_KURSOW)+MIN_ILOSC_KURSOW;
             stworzoneUczenia+=iloscWylosowanychKursow;
 
             Kursant finalKursant = kursant;
@@ -91,8 +92,8 @@ public class GeneratorUczenie extends GeneratorAbstract{
                         przypiszInstruktora(wylosowanyWariant,Uprawnienia.T),
                         przypiszInstruktora(wylosowanyWariant,Uprawnienia.P),
                         df.format(przypiszDateRozpoczecia(wylosowanyWariant)),
-                        random.nextInt(MAX_ILOSC_EGZ_TEORII + 1 - MIN_ILOSC_EGZ) + MIN_ILOSC_EGZ,
-                        random.nextInt(MAX_ILOSC_EGZ_PRAKTYKI + 1 - MIN_ILOSC_EGZ) + MIN_ILOSC_EGZ
+                        random.nextInt(MAX_ILOSC_EGZ_TEORII-MIN_ILOSC_EGZ) + MIN_ILOSC_EGZ,
+                        random.nextInt(MAX_ILOSC_EGZ_PRAKTYKI-MIN_ILOSC_EGZ) + MIN_ILOSC_EGZ
                 ))
             );
 
@@ -177,7 +178,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
         Instruktor instruktor = null;
         int proby = 0;
 
-        //dla postawowej wersji z 6 instruktorami
+        //dla podstawowej wersji z 6 instruktorami
         if (instruktorzy.size() == 6) {
             for(Instruktor ins : instruktorzy) {
                 if(
