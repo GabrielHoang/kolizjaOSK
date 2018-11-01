@@ -10,7 +10,7 @@ public class test {
 
     static int iloscKursantow = 300000;
     static int iloscInstruktorow = 1000;
-    static int iloscUczen = 500000;
+    static int iloscUczen = 1000000;
     static int liczbaDni = 60;
     static int iloscUczenZmian = 500;
 
@@ -91,12 +91,12 @@ public class test {
         nowiKursanci = generatorZmian.createKursanci();
         nowiInstruktorzy = generatorZmian.createInstruktorzy(iloscInstruktorow);
 
-        if(!maloDanych) {
-            nowiInstruktorzy.addAll(generatorZmian.modifyInstruktorzy());
-        }
+//        if(!maloDanych) {
+//            nowiInstruktorzy.addAll(generatorZmian.modifyInstruktorzy());
+//        }
 
 
-        OutputFile.createBulk(nowiInstruktorzy,"instruktorzy_t2");
+
         OutputFile.createBulk(nowiKursanci,"kursanci_t2");
 
         System.out.println("Stworzono dodatkowych instruktorow i kursantow");
@@ -120,6 +120,10 @@ public class test {
 //        start = System.currentTimeMillis();
 //        GeneratorWynikowAnkiet generatorWynikowAnkiet =
 //                new GeneratorWynikowAnkiet(instruktorzy,kursy,kursanci,generatorUczenie.getUczenie());
+//
+//
+//
+//
 //        generatorWynikowAnkiet.create();
 //        ankiety = generatorWynikowAnkiet.getAnkiety();
 //        System.out.println("Czas generowania ankiet: " + (System.currentTimeMillis()-start)/1000 + " s");
@@ -133,10 +137,12 @@ public class test {
 //        generatorWynikowAnkietZmiany.create();
 //        noweAnkiety = generatorWynikowAnkietZmiany.getAnkiety();
 //        OutputFile.createBulk(noweAnkiety,"ankiety_t2");
+//
+//        nowiInstruktorzy.addAll(generatorZmian.modifyInstruktorzy());
+//        OutputFile.createBulk(nowiInstruktorzy,"instruktorzy_t2");
 
 
     }
-
 
 
 }

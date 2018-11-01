@@ -64,20 +64,20 @@ public class GeneratorZmian extends GeneratorAbstract {
                 wczesniejszaKategoria = Kategoria.C;
             }
             instruktor = instruktorzy.get(index);
-            try{
-                for(Uczenie ucz : generatorUczenie.getUczenie()) {
-                    if (ucz.getIdInstruktoraPraktyki() == instruktor.getId()) {
-                        nowyInstruktor = generatorUczenie.znajdzInstruktora(wczesniejszaKategoria, Uprawnienia.P);
-                        ucz.setIdInstruktoraPraktyki(nowyInstruktor.getId());
-                    }
-                    else  if (ucz.getIdInstruktoraTeorii() == instruktor.getId()) {
-                        nowyInstruktor = generatorUczenie.znajdzInstruktora(wczesniejszaKategoria, Uprawnienia.T);
-                        ucz.setIdInstruktoraTeorii(nowyInstruktor.getId());
-                    }
-                }
-            }catch (Exception e ) {
-                e.printStackTrace();
-            }
+//            try{
+//                for(Uczenie ucz : generatorUczenie.getUczenie()) {
+//                    if (ucz.getIdInstruktoraPraktyki() == instruktor.getId()) {
+//                        nowyInstruktor = generatorUczenie.znajdzInstruktora(wczesniejszaKategoria, Uprawnienia.P);
+//                        ucz.setIdInstruktoraPraktyki(nowyInstruktor.getId());
+//                    }
+//                    else  if (ucz.getIdInstruktoraTeorii() == instruktor.getId()) {
+//                        nowyInstruktor = generatorUczenie.znajdzInstruktora(wczesniejszaKategoria, Uprawnienia.T);
+//                        ucz.setIdInstruktoraTeorii(nowyInstruktor.getId());
+//                    }
+//                }
+//            }catch (Exception e ) {
+//                e.printStackTrace();
+//            }
 
 
 
