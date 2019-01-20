@@ -28,7 +28,7 @@ public class GeneratorKursow extends GeneratorAbstract {
     public List<Kurs> createEveryType() {
 
         List<Kurs> kursy = new ArrayList<Kurs>();
-        int i = 0;
+        int i = 1;
         for(Kategoria kat : Kategoria.values()) {
             for(Typ typ : Typ.values()) {
                 for(int godzina : TABELA_GODZIN_KURSOW_PODST) {

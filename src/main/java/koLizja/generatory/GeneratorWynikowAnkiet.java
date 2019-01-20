@@ -10,10 +10,17 @@ import java.util.*;
 
 public class GeneratorWynikowAnkiet extends GeneratorAbstract {
 
+    //listy z gotowymi danymi
     private List<Instruktor> instruktorzy;
     private List<Kurs> kursy;
     private List<Kursant> kursanci;
     private List<Uczenie> uczenie;
+    //iterator dla głównej części generatora (uczenie)
+    private ListIterator<Uczenie> uczenieIterator;
+    //zmienne
+    private Uczenie currentUczenie;
+    int i = 0;
+    //wyjściowa lista ankiet
     @Getter
     private List<Ankieta> ankiety = new ArrayList<Ankieta>();
 
@@ -22,16 +29,19 @@ public class GeneratorWynikowAnkiet extends GeneratorAbstract {
         this.kursy = kursy;
         this.kursanci = kursanci;
         this.uczenie = uczenie;
+        this.uczenieIterator = uczenie.listIterator();
     }
 
     //to generowanie nie uwzglednia dodatkowych uwag mozliwych do pozostawienia pokazdej sekcji ankiety
     public void create() {
-        for (Uczenie ucz : uczenie) {
+        while(uczenieIterator.hasNext()) {
             try {
+                i++;
+                currentUczenie = uczenieIterator.next();
                 Ankieta ankieta = new Ankieta();
-                ankieta.setTimeStamp(df.format(getTimeStamp(ucz.getDataRozpoczecia())));
+                ankieta.setTimeStamp(df.format(getTimeStamp(currentUczenie.getDataRozpoczecia())));
                 //TEORIA
-                ankieta.setImieNazwiskoInstruktoraTeorii(getImieNazwiskoInstruktoraById(ucz.getIdInstruktoraTeorii()));
+                ankieta.setImieNazwiskoInstruktoraTeorii(getImieNazwiskoInstruktoraById(currentUczenie.getIdInstruktoraTeorii()));
                 ankieta.setPoziomWiedzyInstruktoraTeorii(losujDomyslnyPrzedzial());
                 ankieta.setSposobPrzekazywaniaWiedzyTeoria(losujDomyslnyPrzedzial());
                 ankieta.setAtmosferaZajecTeorii(losujDomyslnyPrzedzial());
@@ -39,7 +49,7 @@ public class GeneratorWynikowAnkiet extends GeneratorAbstract {
                 ankieta.setInstruktorSpoznialSieTeoria(losujTakNie());
                 ankieta.setExtraUwagi1("brak");
                 //PRAKTYKA
-                ankieta.setImieNazwiskoInstruktoraPraktyki(getImieNazwiskoInstruktoraById(ucz.getIdInstruktoraPraktyki()));
+                ankieta.setImieNazwiskoInstruktoraPraktyki(getImieNazwiskoInstruktoraById(currentUczenie.getIdInstruktoraPraktyki()));
                 ankieta.setPoziomWiedzyInstruktoraPraktyki(losujDomyslnyPrzedzial());
                 ankieta.setSposobPrzekazywaniaWiedzyPraktyka(losujDomyslnyPrzedzial());
                 ankieta.setAtmosferaZajecPraktyki(losujDomyslnyPrzedzial());
@@ -47,26 +57,26 @@ public class GeneratorWynikowAnkiet extends GeneratorAbstract {
                 ankieta.setInstruktorSpoznialSiePraktyka(losujTakNie());
                 ankieta.setExtraUwagi2("brak");
                 //INFO
-                ankieta.setIdKursu(ucz.getIdKursu());
+                ankieta.setIdKursu(currentUczenie.getIdKursu());
                 ankieta.setOgolnaOcenaKursu((ankieta.getOcenaPrzygotowaniaPraktyki() +
                         ankieta.getOcenaPrzygotowaniaTeorii())/2);
-                ankieta.setSkadWieszOSzkole(losujZrodloWiedzy(ucz.getPeselKursanta()).toString());
+                ankieta.setSkadWieszOSzkole(losujZrodloWiedzy(currentUczenie.getPeselKursanta()).toString());
                 ankieta.setNapiszeNaTrojmiescie(losujTakNie());
                 ankieta.setPoleceZnajomym(losujTakNie());
                 //METRYKA
-                ankieta.setImie(getKursantByPesel(ucz.getPeselKursanta()).getImie());
-                ankieta.setNazwisko(getKursantByPesel(ucz.getPeselKursanta()).getNazwisko());
-                ankieta.setWiek(getWiekKursanta(ucz));
-                ankieta.setPesel(ucz.getPeselKursanta());
+                ankieta.setImie(getKursantByPesel(currentUczenie.getPeselKursanta()).getImie());
+                ankieta.setNazwisko(getKursantByPesel(currentUczenie.getPeselKursanta()).getNazwisko());
+                ankieta.setWiek(getWiekKursanta(currentUczenie));
+                ankieta.setPesel(currentUczenie.getPeselKursanta());
 
                 ankiety.add(ankieta);
+                System.out.println(i);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-
 
 
 

@@ -13,14 +13,14 @@ public class Instruktor {
     private Uprawnienia uprawnienia;
     private Kategoria kategorie;
     private String dataZatrudnienia;
-    private String dataUrodzenia;
     private String dataUprawnien;
+    private String dataUrodzenia;
     private String numTel;
     private String adres;
 
     public String toString(){
         String str = Integer.toString(id) + ';' + imie + ';' + nazwisko + ';' + uprawnienia + ';'
-                    + kategorie + ';' +  dataZatrudnienia + ';' + dataUrodzenia + ';' + dataUprawnien + ';'
+                    + kategorie + ';' +  dataZatrudnienia + ';' + dataUprawnien + ';' + dataUrodzenia + ';'
                     + numTel + ';' + adres;
         return str;
     }

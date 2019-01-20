@@ -23,5 +23,9 @@ public class GeneratorKursantow extends GeneratorAbstract{
         return kursant;
     }
 
+    public GeneratorKursantow() {
+        generatorPeseli.printRozmiarListy();
+    }
+
 
 }

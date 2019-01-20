@@ -31,7 +31,7 @@ public class GeneratorAbstract {
     //KURS
     protected int GODZINY_KURSU = 30;
     //ustawienia generowanie numeru PESEL
-    protected int ILOSC_ZADANA = 300000;
+    protected int ILOSC_ZADANA = 430000;
     protected int PIERWSZA_CYFRA_ROKU_OD = 7;
     protected int PIERWSZA_CYFRA_ROKU_DO = 9;
     protected int DRUGA_CYFRA_ROKU_OD = 0;
@@ -40,10 +40,10 @@ public class GeneratorAbstract {
     protected int PIERWSZA_CYFRA_MIESIACA_DO = 0;
     protected int DRUGA_CYFRA_MIESIACA_OD = 1;
     protected int DRUGA_CYFRA_MIESIACA_DO = 9;
-    protected int DNI_OD = 10;
-    protected int DNI_DO = 28;
-    protected int KONIEC_NUMERU_OD = 10000;
-    protected int KONIEC_NUMERU_DO = 99999;
+    protected int DNI_OD = 1;
+    protected int DNI_DO = 2;
+    protected int KONIEC_NUMERU_OD = 989898;
+    protected int KONIEC_NUMERU_DO = 999999;
 
 
     //UCZENIE

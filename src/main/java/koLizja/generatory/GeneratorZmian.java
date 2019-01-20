@@ -32,6 +32,7 @@ public class GeneratorZmian extends GeneratorAbstract {
         GeneratorKursantow generatorKursantow = new GeneratorKursantow();
 
         int i = 0;
+        //domyślnie to 360/14
         while(i < liczbaDni/DNI_NOWY_KURSANT) {
             nowiKursanci.add(generatorKursantow.create(i));
             i+=1;

@@ -15,9 +15,9 @@ public class OutputFile {
 
         try {
 
-//            FileWriter fileWriter = new FileWriter(nazwa+rozszerzeniePliku);
-            FileOutputStream fileStream = new FileOutputStream(new File(nazwa+rozszerzeniePliku));
-            OutputStreamWriter fileWriter = new OutputStreamWriter(fileStream, "UTF-8");
+            FileWriter fileWriter = new FileWriter(nazwa+rozszerzeniePliku);
+//            FileOutputStream fileStream = new FileOutputStream(new File(nazwa+rozszerzeniePliku));
+//            OutputStreamWriter fileWriter = new OutputStreamWriter(fileStream, "UTF-8");
             for (T elem: lista) {
                 fileWriter.write(elem.toString() + "\r\n");
             }

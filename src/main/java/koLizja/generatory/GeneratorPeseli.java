@@ -4,17 +4,24 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
+
+//Generator peseli najprzód generuje określoną ilość unikalnych peseli (po kolei dla zadanej liczby),
+//MIESZA JE, po czym możliwe jest wyciągnięcie z jego listy peselu po jego numerze id.
 
 public class GeneratorPeseli extends GeneratorAbstract{
 
     private static GeneratorPeseli instance;
     private List<String> listaPeseli = new ArrayList<>();
 
+    private final static Logger logger = Logger.getLogger(Logger.class.getName());
+
+
     private GeneratorPeseli() {
         int rokPierwszaCyfra, rokDrugaCyfra, miesiacPierwszaCyfra, miesiacDrugaCyfra, dzien, koniecNumeru;
         //ilosc danych generowana domyslnie to 5130
         //generowanie z lekkim nadmiarem
-        int iloscObrotowPetli = ILOSC_ZADANA/5080;
+        //int iloscObrotowPetli = ILOSC_ZADANA/5080;
 
         //to jest poor programming example
         for(rokPierwszaCyfra = PIERWSZA_CYFRA_ROKU_OD; rokPierwszaCyfra <= PIERWSZA_CYFRA_ROKU_DO; rokPierwszaCyfra++) {
@@ -22,8 +29,7 @@ public class GeneratorPeseli extends GeneratorAbstract{
                 for(miesiacPierwszaCyfra = PIERWSZA_CYFRA_MIESIACA_OD; miesiacPierwszaCyfra<=PIERWSZA_CYFRA_MIESIACA_DO; miesiacPierwszaCyfra++) {
                     for(miesiacDrugaCyfra = DRUGA_CYFRA_MIESIACA_OD; miesiacDrugaCyfra<=DRUGA_CYFRA_MIESIACA_DO;miesiacDrugaCyfra++) {
                         for(dzien = DNI_OD; dzien <=DNI_DO; dzien++) {
-                            for(int i = 0; i < iloscObrotowPetli; i++) {
-                                koniecNumeru = faker.number().numberBetween(KONIEC_NUMERU_OD, KONIEC_NUMERU_DO);
+                            for(koniecNumeru = KONIEC_NUMERU_OD; koniecNumeru<=KONIEC_NUMERU_DO; koniecNumeru++) {
                                 listaPeseli.add((
                                         Integer.toString(rokPierwszaCyfra)
                                                 + Integer.toString(rokDrugaCyfra)
@@ -39,6 +45,7 @@ public class GeneratorPeseli extends GeneratorAbstract{
             }
         }
 
+
         Collections.shuffle(listaPeseli);
     }
 
@@ -53,7 +60,7 @@ public class GeneratorPeseli extends GeneratorAbstract{
         return listaPeseli.get(i);
     }
     public void printRozmiarListy() {
-        System.out.println("Lista zawiera: " + listaPeseli.size());
+        logger.info("Lista zawiera: " + listaPeseli.size());
     }
 
 }

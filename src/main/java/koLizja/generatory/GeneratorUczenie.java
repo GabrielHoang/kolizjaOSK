@@ -63,7 +63,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
 
         while (kursantIterator.hasNext() && stworzoneUczenia < zadanychUczen) {
 
-
+        //przebieg sterowania przydzielania do kolejnych kursów
             if(kursantIterator.nextIndex() % PORCJA_KURSANTOW == 0) {
                 porcjaKursantow++;
                 godzinaZajec++;
@@ -73,6 +73,7 @@ public class GeneratorUczenie extends GeneratorAbstract{
             if(kursantIterator.nextIndex() % KURSANCI_NA_TERMIN == 0) {
                 kolejnyTerminKursow++;
             }
+        //--------------------------------------------------------------------------
 
             kursant = kursantIterator.next();
 
